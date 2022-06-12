@@ -2,8 +2,16 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
+
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import controller.LoginController;
+import model.DbMock;
+import model.Utente;
+
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.MouseAdapter;
@@ -14,7 +22,7 @@ public class Login {
 	protected Shell shell;
 	private Text text;
 	private Text text_1;
-
+	private Shell shellNon;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -75,17 +83,39 @@ public class Login {
 		
 		text_1 = new Text(shell, SWT.BORDER | SWT.PASSWORD);
 		text_1.setBounds(185, 240, 439, 21);
-		
+		Label lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel.setBounds(303, 285, 306, 21);
 		Button btnLogin = new Button(shell, SWT.NONE);
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				System.out.println("ciao "+ text.getText()+ "passwd " +text_1.getText() );
+				LoginController lc = new LoginController();
+				boolean check= lc.verificaAccesso( text.getText(), text_1.getText());
+				if(check)
+				{
+					Home h= new Home();
+					shellNon.close();
+					shell.close();
+					h.open();
+				}else
+				{
+					lblNewLabel.setText("Riprova credenziali errate");
+				}
 			}
 		});
 		btnLogin.setBounds(185, 280, 75, 25);
 		btnLogin.setForeground(SWTResourceManager.getColor(255, 69, 0));
 		btnLogin.setText("Login");
-
+		
 	}
+
+	public Shell getShellNon() {
+		return shellNon;
+	}
+
+	public void setShellNon(Shell shellNon) {
+		this.shellNon = shellNon;
+	}
+	
 }

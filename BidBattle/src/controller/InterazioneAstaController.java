@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Asta;
+import model.DbMock;
 import model.Offerta;
 
 public class InterazioneAstaController {
-List<Offerta> offerte= new ArrayList<>();
-List<Asta> aste= new ArrayList<>();
+DbMock db = new DbMock();
+List<Asta> aste= DbMock.getAsteDaMostare();
 
 public InterazioneAstaController() {};
 	 public Offerta inserisciOfferta(Asta asta, double importo, String email)
@@ -47,12 +48,7 @@ public InterazioneAstaController() {};
 	 {
 		 aste.add(a);
 	 }
-	public List<Offerta> getOfferte() {
-		return offerte;
-	}
-	public void setOfferte(List<Offerta> offerte) {
-		this.offerte = offerte;
-	}
+	
 	public List<Asta> getAste() {
 		return aste;
 	}

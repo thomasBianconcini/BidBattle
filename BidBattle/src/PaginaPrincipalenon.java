@@ -32,6 +32,7 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -50,9 +51,13 @@ public class PaginaPrincipalenon {
 	private List<Composite> quadrati = new ArrayList<>();
 	private boolean check= true;
 	private Text txtRicercaPerEmail;
-
+	private static MouseAdapter ma;
 	List<Asta> ricA = new ArrayList<Asta>();
 	List<Utente> ricU = new ArrayList<Utente>();
+	List<Integer> pag= new ArrayList<Integer>();
+	private boolean ricerca=false;
+	List<VediAsta> current=  new ArrayList<VediAsta>();
+	private int count =0;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -86,8 +91,9 @@ public class PaginaPrincipalenon {
 	protected void createContents() {
 		shell = new Shell(display);
 		shell.setSize(1920, 1080);
+		List<Asta> aste= DbMock.getAsteDaMostare();
 		//shell.setFullScreen(false);
-		shell.setText("SWT Application");
+		shell.setText("PaginaPrincipaleNonAutenticata");
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		Label label = new Label(shell, SWT.SEPARATOR | SWT.VERTICAL);
 		label.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -120,12 +126,27 @@ public class PaginaPrincipalenon {
 		btnCheckButton.setBounds(1381, 159, 93, 23);
 		btnCheckButton.setText("Utente");
 		Label lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				pagina=1;
+				mostra(aste,pagina);
+			}
+		});
 		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel.setBounds(153, 480, 78, 37);
 		lblNewLabel.setText("Home");
 		
 		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Login l= new Login();
+				l.setShellNon(shell);
+				l.open();
+			}
+		});
 		lblNewLabel_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1.setText("Login");
@@ -155,7 +176,7 @@ public class PaginaPrincipalenon {
 		Button btnNewButton = null;
 		Label lblTitoloAsta = null;
 		Composite composite = null;
-		List<Asta> aste= DbMock.getAsteDaMostare();
+		
 		mostra(aste,pagina,grpLeMieAste,lblAsta,btnNewButton,lblTitoloAsta,composite);
 		Button btnNewButton_1 = new Button(grpLeMieAste, SWT.NONE);
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
@@ -173,13 +194,11 @@ public class PaginaPrincipalenon {
 						else
 						{
 							pagina = pagina +1;
-							System.out.println("avanti");
 							mostra(aste,pagina);
 						}
 					}
 				}else
 				{
-					System.out.print("sono qui");
 					if(check)
 					{
 						if(ricU!=null)
@@ -195,13 +214,35 @@ public class PaginaPrincipalenon {
 		btnNewButton_1.setText("Avanti");
 		
 		Button btnNewButton_2 = new Button(grpLeMieAste, SWT.NONE);
+	
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if(pagina !=1)
+				if(!btnCheckButton.getSelection())
 				{
-				pagina = pagina -1;
-				mostra(aste,pagina);
+					if(pagina!=1)
+					{
+						if(ricA==null)
+						{
+						pagina = pagina -1;
+						mostra(aste,pagina);
+						}
+						else
+						{
+							pagina = pagina -1;
+							mostra(aste,pagina);
+						}
+					}
+				}else
+				{
+					if(pagina!=1)
+					{
+						if(ricU!=null)
+						{
+						pagina = pagina -1;
+						mostraUtente(ricU,pagina);
+						}
+					}
 				}
 			}
 		});
@@ -231,7 +272,9 @@ public class PaginaPrincipalenon {
 						{
 						ricA= nonContr.ricercaPerAste(txtRicercaPerEmail.getText());
 						pagina =1;
+						count=ricA.size();
 						mostra(ricA,pagina);
+						ricerca=true;
 						}else
 						{
 							ricU =nonContr.ricercaPerUtenti(txtRicercaPerEmail.getText());
@@ -245,12 +288,8 @@ public class PaginaPrincipalenon {
 		});
 		txtRicercaPerEmail.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		txtRicercaPerEmail.setText(" Ricerca Asta (default) o Utente (NomeUtente)");
-		txtRicercaPerEmail.setBounds(480, 160, 895, 23);
-		
-		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
-		lblNewLabel_2.setBounds(515, 92, 315, 15);
-		lblNewLabel_2.setText("New Label");
-	
+		txtRicercaPerEmail.setBounds(480, 154, 895, 23);
+		pag.add(pagina);
 		/*Thread timeThread = new Thread() {
             public void run() {
                 while (true) {
@@ -274,7 +313,7 @@ public class PaginaPrincipalenon {
         timeThread.setDaemon(true);
         timeThread.start();*/
 	}
-	public void mostra(List<Asta> aste,int pagina,Group g, Label l1 , Button b1, Label l2, Composite c)
+	public void mostra(List<Asta> aste,int pp,Group g, Label l1 , Button b1, Label l2, Composite c)
 	{
 		g.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		g.setBounds(480, 200, 1104, 1000);
@@ -282,9 +321,10 @@ public class PaginaPrincipalenon {
 		ricU=null;
 		for(int i=0;i<4;i++)
 		{
-			if((pagina-1)*4+i<DbMock.getAsteDaMostare().size())
+			
+			if((pp-1)*4+i<DbMock.getAsteDaMostare().size())
 			{
-				Asta a=aste.get((pagina-1)*4+i);
+				Asta a=aste.get((pp-1)*4+i);
 				Label lblAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.NORMAL));
 				lblAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -298,8 +338,28 @@ public class PaginaPrincipalenon {
 				btnNewButton.setBounds(743, 83+i*200, 80, 32);
 				bottoni.add(btnNewButton);
 				btnNewButton.setText("Visualizza");
-		
-				
+				btnNewButton.addMouseListener(ma= new MouseAdapter() {
+					@Override
+					public void mouseUp(MouseEvent e) {
+						if(pp==pagina)
+						{
+							if(!ricerca)
+							{
+								VediAsta va= new VediAsta();
+								va.setNomeAsta(a.getTitoloAsta());
+								va.open();
+							}else
+							{
+								System.out.println(current.size());
+								System.out.println(current.get(0).getNomeAsta());
+								System.out.println(count);
+								if(current.size()<=count)
+								current.get(count-1).open();
+							}
+						}
+					}
+				});
+				//btnNewButton.addM
 				Label lblTitoloAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblTitoloAsta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 				lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -316,7 +376,7 @@ public class PaginaPrincipalenon {
 		
 	}
 		
-	public void mostra(List<Asta> aste, int pagina)
+	/*public void mostra(List<Asta> aste, int pp)
 		{
 			for(int i=0;i<4;i++)
 			{
@@ -333,6 +393,17 @@ public class PaginaPrincipalenon {
 					b.setVisible(true);
 					c.setVisible(true);
 					b.setText("Visualizza");
+					b.addMouseListener(ma= new MouseAdapter() {
+						@Override
+						public void mouseUp(MouseEvent e) {
+							if(pp==pagina)
+							{
+							VediAsta va= new VediAsta();
+							va.setNomeAsta(a.getTitoloAsta());
+							va.open();
+							}
+						}
+					});
 					if(((pagina-1)*4+i)==aste.size()-1)
 					{
 						check=false;
@@ -346,6 +417,69 @@ public class PaginaPrincipalenon {
 					c.setVisible(false);
 				}
 			}
+		}
+	*/
+		public void mostra(List<Asta> aste, int pp)
+		{
+			current=new ArrayList<VediAsta>();
+		boolean creami=false;
+		for(Integer inter: pag)
+		{
+			if(inter==pp)
+			{
+				 creami = true;
+			}
+		}
+		if(!creami)
+		pag.add(pp);
+			for(int i=0;i<4;i++)
+			{
+				Label l1= titoli.get(i);
+				VediAsta va=new VediAsta();
+				Label l2= descrizioni.get(i);
+				Button b = bottoni.get(i);
+				Composite c = quadrati.get(i);
+				
+				if((pagina-1)*4+i<aste.size())
+				{
+					check= true;
+					Asta a= aste.get((pagina-1)*4+i);
+					va.setNomeAsta(a.getTitoloAsta());
+					l1.setText(a.getTitoloAsta());
+					l2.setText(a.getTitoloAsta());
+					b.setVisible(true);
+					c.setVisible(true);
+					b.setText("Visualizza");
+					if(!creami || ricerca)
+					{
+					b.addMouseListener(ma= new MouseAdapter() {
+						@Override
+						public void mouseUp(MouseEvent e) {
+							if(pp==pagina)
+							{
+							va.open();
+							}
+						}
+					});
+					
+					}
+					if(((pagina-1)*4+i)==aste.size()-1)
+					{
+						check=false;
+					}
+					current.add(va);
+				}else
+				{
+					check=false;
+					l1.setText("");
+					l2.setText("");
+					b.setVisible(false);
+					c.setVisible(false);
+				}
+			}
+			
+			if(ricerca==true)
+				ricerca=false;
 		}
 	public void mostraUtente(List<Utente> utenti, int pagina)
 	{

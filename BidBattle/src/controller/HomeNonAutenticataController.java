@@ -13,13 +13,12 @@ public class HomeNonAutenticataController {
 	private List<Utente> utenti= new ArrayList<>();
 public HomeNonAutenticataController() {
 	db =new DbMock();
-	aste = db.getAsteDaMostare();
-	utenti = db.getUtenti();
+	aste = DbMock.getAsteDaMostare();
+	utenti = DbMock.getUtenti();
 }
 public List<Asta> ricercaPerAste(String ricerca)
 {
 	List<Asta> asteRic= new ArrayList<>();
-	System.out.println("size "+aste.size());
 	for(Asta a : aste)
 	{
 		
