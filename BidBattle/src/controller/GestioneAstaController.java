@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Asta;
+import model.DbMock;
 import model.Prodotto;
 
 public class GestioneAstaController {
 
 	private List<Asta> listaAste= new ArrayList<>();
 	public GestioneAstaController() {};
-	public Asta creaAsta(Prodotto prodotto, String [] arr) {
+	public Asta creaAsta(Prodotto prodotto, String [] arr, LocalDateTime l,double prezzo) {
 		
 		Asta res = null;
-		res= new Asta(arr[0].toString(),arr[1].toString(),LocalDateTime.parse(arr[2]),prodotto,arr[3].toString());
-		listaAste.add(res);
+		res= new Asta(arr[0].toString(),arr[1].toString(),l,prodotto,arr[2].toString(),prezzo);
+		DbMock.getCurrentUser().getAstePersonali().add(res);
+		DbMock.getAsteDaMostare().add(res);
 		return res;
 	}
 	public List<Asta> getListaAste() {

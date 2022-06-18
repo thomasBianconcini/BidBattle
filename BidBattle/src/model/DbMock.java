@@ -16,14 +16,24 @@ public class DbMock {
 		if(!init)
 		{
 			init = true;
+			Utente test= new Utente("c","c","cicicoc");
+			test.setDescrizione("ecco la descrizione");
+			test.setNomeProfilo("nomeTest");
+			utenti.add(test);
+			DbMock.setCurrentUser(test);
 			for(int i = 0; i<12 ;i++)
 			{
 				Prodotto p1 = new Prodotto("titolo"+i, "descrizione"+i, i+"" ,""+ i);
-				Asta a1  = new Asta("asta"+i, "descrizione"+i, LocalDateTime.now(), p1, i+"");
+				Asta a1  = new Asta("asta"+i, "descrizione"+i, LocalDateTime.now(), p1, i+"",1.00);
 				Offerta of = new Offerta(15, "mario@canss", a1);
 				a1.inserisci(of);
 				asteDaMostare.add(a1);
+				if(i%2==0)
+				{
+					test.add(a1);
+				}
 			}
+			
 			for(int i = 0; i<12 ;i++)
 			{
 				Utente u1= new Utente("u+"+i+"@"+"gmail.com", "Password", "via bella bella");
@@ -31,6 +41,7 @@ public class DbMock {
 				u1.setNomeProfilo("Il magnifico"+ i+i+i+i+i+i );
 				utenti.add(u1);
 			}
+		
 		}
 	};
 	public static List<Asta> getAsteDaMostare() {
@@ -57,8 +68,6 @@ public class DbMock {
 			if(a.getTitoloAsta().equals(titolo))
 			{
 				res=a;
-				System.out.println(a.getTitoloAsta());
-				System.out.println("ciao");
 			}
 		}
 		return res;
@@ -66,8 +75,13 @@ public class DbMock {
 	public static Utente getCurrentUser() {
 		return currentUser;
 	}
-	public static void setCurrentUser(Utente currentUser) {
-		DbMock.currentUser = currentUser;
+	public static void setCurrentUser(Utente currentUser2) {
+		utenti.remove(currentUser);
+		utenti.add(currentUser2);
+		DbMock.currentUser = currentUser2;
 	}
-	
+	public static void add (Utente u)
+	{
+		utenti.add(u);
+	}
 }

@@ -151,17 +151,14 @@ public class VediAsta {
 		Label lblNewLabel_7 = new Label(shell, SWT.NONE);
 		lblNewLabel_7.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_7.setBounds(189, 452, 258, 15);
+		if(a.getOfferteInCorso().size()>0)
 		lblNewLabel_7.setText(""+a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getPrezzo());
-		
+		else
+			lblNewLabel_7.setText(""+a.getPrezzoIniziale());
 		Label lblNewLabel_8 = new Label(shell, SWT.NONE);
 		lblNewLabel_8.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_8.setBounds(189, 499, 66, 15);
-		lblNewLabel_8.setText(a.getDurataAsta().toString());
-		
-		Label lblNewLabel_8_1 = new Label(shell, SWT.NONE);
-		lblNewLabel_8_1.setText("12:00");
-		lblNewLabel_8_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_8_1.setBounds(317, 499, 130, 15);
+		lblNewLabel_8.setBounds(189, 499, 329, 15);
+		lblNewLabel_8.setText("Data "+a.getDurataAsta().getDayOfMonth()+ "/"+(a.getDurataAsta().getMonthValue()+1)+"/" +a.getDurataAsta().getYear()+ "  Orario: "+ a.getDurataAsta().getHour()+":"+a.getDurataAsta().getMinute());
 
 	}
 

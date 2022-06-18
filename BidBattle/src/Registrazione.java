@@ -8,6 +8,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import controller.RegistrazioneController;
+import model.DbMock;
+import model.Utente;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.custom.CBanner;
@@ -25,6 +27,7 @@ public class Registrazione  {
 	private Text text_3;
 	private Text text_4;
 	private Text text;
+	private Shell shellNon;
 
 	/**
 	 * Launch the application.
@@ -94,7 +97,7 @@ public class Registrazione  {
 		lblConfermaPassword.setBounds(120, 190, 109, 15);
 		lblConfermaPassword.setText("Conferma Password:");
 		
-		text_2 = new Text(shell, SWT.BORDER);
+		text_2 = new Text(shell, SWT.BORDER | SWT.PASSWORD);
 		text_2.setBounds(120, 220, 439, 21);
 		
 		Label lblIndirizzo = new Label(shell, SWT.NONE);
@@ -118,6 +121,7 @@ public class Registrazione  {
 				if(check.equals("OK"))
 				{
 				Home home= new Home();
+				shellNon.close();
 				shell.close();
 				home.open();
 				}else
@@ -141,9 +145,14 @@ public class Registrazione  {
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(120, 90, 439, 21);
-		
-		
-		
-		
 	}
+
+	public Shell getShellNon() {
+		return shellNon;
+	}
+
+	public void setShellNon(Shell shellNon) {
+		this.shellNon = shellNon;
+	}
+	
 }

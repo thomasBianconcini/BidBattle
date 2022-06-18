@@ -24,7 +24,8 @@ public class RegistrazioneController {
 		{
 			Utente u = new Utente(email, password, indirizzo);
 			utenti.add(u);
-			db.setUtenti(utenti);
+			DbMock.setUtenti(utenti);
+			DbMock.setCurrentUser(u);
 			return "OK";
 		}else if(!password.equals(conferma))
 		{

@@ -1,18 +1,56 @@
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Label;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import controller.HomeNonAutenticataController;
+import model.Asta;
+import model.DbMock;
+import model.Utente;
+
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.dnd.DropTarget;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.dnd.DND;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class Profilo {
 
 	protected Shell shell;
+	private Text txtRicercaPerUtente;
 	private Display display = Display.getDefault();
+	DbMock db =new DbMock();
+	private int pagina =1;
+	private List<Label> titoli = new ArrayList<>();
+	private List<Label> descrizioni = new ArrayList<>();
+	private List<Button> bottoni = new ArrayList<>();
+	private List<Composite> quadrati = new ArrayList<>();
+	private boolean check= true;
+	private Text txtRicercaPerEmail;
+	private static MouseAdapter ma;
+	List<Asta> ricA = new ArrayList<Asta>();
+	List<Utente> ricU = new ArrayList<Utente>();
+	List<Integer> pag= new ArrayList<Integer>();
+	private boolean ricerca=false;
+	List<VediAsta> current=  new ArrayList<VediAsta>();
+	private int count =0;
+	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	/**
 	 * Launch the application.
 	 * @param args
@@ -45,169 +83,284 @@ public class Profilo {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
+		shell = new Shell(display);
+		shell.setSize(1920, 1080);
+		List<Asta> aste= DbMock.getAsteDaMostare();
+		shell.setFullScreen(true);
+		shell.setText("PaginaPrincipaleNonAutenticata");
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		shell.setSize(668, 426);
-		shell.setText("SWT Application");
-		
 		Label label = new Label(shell, SWT.SEPARATOR | SWT.VERTICAL);
 		label.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		label.setBounds(135, -19, 2, 696);
+		Point p= shell.getSize();
+		label.setBounds(p.x*20/100, -19, 2, 1080);
 		
 		Label label_1 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		label_1.setBounds(-11, 135, 148, 2);
+		label_1.setBounds(-11, 384, p.x*20/100, 2);
+		
 		
 		Label label_1_1 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		label_1_1.setBounds(-11, 185, 148, 2);
+		label_1_1.setBounds(-11, 523, 384, 2);
 		
 		Label label_2 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		label_2.setBounds(-11, 235, 148, 2);
+		label_2.setBounds(-11, 1080,p.x*20/100, 2);
 		
 		Label label_1_2 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		label_1_2.setBounds(-11, 285, 148, 10);
-		
-		Label label_1_3 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
-		label_1_3.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		label_1_3.setBounds(-11, 335, 148, 2);
-		
-		Label label_1_4 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
-		label_1_4.setBounds(-11, 385, 148, 2);
-		
+		label_1_2.setBounds(-11, 1078, p.x*20/100, 10);
 		Label lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Home h= new Home();
+				shell.close();
+				h.open();
+			}
+		});
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel.setBounds(40, 153, 55, 15);
+		lblNewLabel.setBounds(153, 438, 78, 37);
 		lblNewLabel.setText("Home");
 		
-		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
-		lblNewLabel_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1.setText("Profilo\r\n");
-		lblNewLabel_1.setBounds(40, 203, 55, 15);
-		
 		Label lblNewLabel_1_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				
+			}
+		});
+		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1.setText("Wallet");
-		lblNewLabel_1_1.setBounds(40, 253, 55, 15);
-		
-		Label lblNewLabel_1_1_1 = new Label(shell, SWT.NONE);
-		lblNewLabel_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1.setText("Gestione Asta");
-		lblNewLabel_1_1_1.setBounds(32, 303, 78, 15);
-		
-		Label lblNewLabel_1_1_1_1 = new Label(shell, SWT.NONE);
-		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_1.setText("Interazione Asta");
-		lblNewLabel_1_1_1_1.setBounds(25, 353, 100, 15);
+		lblNewLabel_1_1.setText("Interazione Asta");
+		lblNewLabel_1_1.setBounds(100, 994, 190, 37);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
-		lblNewLabel_4.setBounds(0, 0, 134, 134);
-		lblNewLabel_4.setImage(new Image(display,"logo.png"));
+		lblNewLabel_4.setBounds(0, 0, 382, 382);
+		lblNewLabel_4.setImage(new Image(display,"logo.jpg"));
+		Label lblAsta=null;
+		Button btnNewButton = null;
+		Label lblTitoloAsta = null;
 		
-
-		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
-		lblNewLabel_3.setBounds(172, 68, 84, 84);
-		lblNewLabel_3.setImage(new Image(display,"ProfilePic.jpg"));
+	
+		
+		Label label_1_1_1 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		label_1_1_1.setBounds(-6, 662, 384, 2);
+		
+		Label label_1_1_2 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label_1_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		label_1_1_2.setBounds(-6, 801, 384, 2);
+		
+		Label label_1_1_3 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label_1_1_3.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		label_1_1_3.setBounds(-6, 940, 384, 2);
+		
+		Label lblNewLabel_1_1_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.close();
+				Profilo p= new Profilo();
+				p.open();
+			}
+		});
+		lblNewLabel_1_1_1.setText("Profilo");
+		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_1_1_1.setBounds(153, 577, 78, 37);
+		
+		Label lblNewLabel_1_1_1_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1_1_1_1.setText("Wallet");
+		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_1_1_1_1.setBounds(153, 716, 78, 37);
+		
+		Label lblNewLabel_1_1_1_2 = new Label(shell, SWT.NONE);
+		lblNewLabel_1_1_1_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				GestAsta ga = new GestAsta();
+				shell.close();
+				ga.open();
+			}
+		});
+		lblNewLabel_1_1_1_2.setText("Gestione Asta");
+		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_1_1_1_2.setBounds(108, 855, 167, 37);
+		
+		Label lblNomeutente = new Label(shell, SWT.NONE);
+		lblNomeutente.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.NORMAL));
+		lblNomeutente.setBounds(882, 123, 300, 56);
+		if(DbMock.getCurrentUser().getNomeProfilo()==null)
+		{
+			lblNomeutente.setText("NomeProfilo");
+		}else
+		lblNomeutente.setText(DbMock.getCurrentUser().getNomeProfilo());
+		
+		
+		Composite composite_1 = formToolkit.createComposite(shell, SWT.NONE);
+		composite_1.setBounds(480, 220, 200, 200);
+		formToolkit.paintBordersFor(composite_1);
+		
+		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
+		lblNewLabel_1.setForeground(SWTResourceManager.getColor(220, 220, 220));
+		lblNewLabel_1.setBackground(SWTResourceManager.getColor(211, 211, 211));
+		lblNewLabel_1.setBounds(742, 220, 842, 200);
+		if(DbMock.getCurrentUser().getDescrizione()==null)
+		{
+			lblNewLabel_1.setText("Descrizione");
+		}else
+		lblNewLabel_1.setText(DbMock.getCurrentUser().getDescrizione());
+		formToolkit.adapt(lblNewLabel_1, true, true);
 		
 		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2.setBounds(493, 488, 200, 37);
+		formToolkit.adapt(lblNewLabel_2, true, true);
+		lblNewLabel_2.setText("Email:");
 		lblNewLabel_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_2.setBounds(311, 10, 139, 33);
-		lblNewLabel_2.setText("NomeUtente");
+		Label lblNewLabel_2_1 = new Label(shell, SWT.NONE);
+		if(DbMock.getCurrentUser().getEmail()==null)
+		{
+			lblNewLabel_2_1.setText("Email");
+		}else
+		lblNewLabel_2_1.setText(DbMock.getCurrentUser().getEmail());
+		lblNewLabel_2_1.setBounds(1225, 488, 359, 37);
+		formToolkit.adapt(lblNewLabel_2_1, true, true);
+		lblNewLabel_2_1.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		Label lblNewLabel_2_1_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_2_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_2_1_1.setText("*********");
+		lblNewLabel_2_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2_1_1.setBounds(1225, 588, 359, 37);
+		formToolkit.adapt(lblNewLabel_2_1_1, true, true);
+		lblNewLabel_2_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
-		Group grpLeMieAste = new Group(shell, SWT.BORDER);
-		grpLeMieAste.setText("Aste:");
-		grpLeMieAste.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		grpLeMieAste.setBounds(172, 180, 432, 267);
+		Label lblNewLabel_2_2 = new Label(shell, SWT.NONE);
+		lblNewLabel_2_2.setText("Password:");
+		lblNewLabel_2_2.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2_2.setBounds(490, 584, 190, 37);
+		formToolkit.adapt(lblNewLabel_2_2, true, true);
+		lblNewLabel_2_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
-		Label lblAsta = new Label(grpLeMieAste, SWT.NONE);
-		lblAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblAsta.setBounds(10, 35, 55, 15);
-		lblAsta.setText("Asta1");
+		Label lblNewLabel_2_1_3 = new Label(shell, SWT.NONE);
+		if(DbMock.getCurrentUser().getIndirizzo()==null)
+		{
+			lblNewLabel_2_1_3.setText("Indirizzo");
+		}else
+		lblNewLabel_2_1_3.setText(DbMock.getCurrentUser().getIndirizzo());
+		lblNewLabel_2_1_3.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2_1_3.setBounds(1225, 688, 359, 37);
+		formToolkit.adapt(lblNewLabel_2_1_3, true, true);
+		lblNewLabel_2_1_3.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
-		Label lblTitoloAsta = new Label(grpLeMieAste, SWT.NONE);
-		lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblTitoloAsta.setBounds(10, 55, 223, 15);
-		lblTitoloAsta.setText("Titolo: asta1 , Categoria: tecnologia ");
+		Label lblNewLabel_2_4 = new Label(shell, SWT.NONE);
+		lblNewLabel_2_4.setText("Indirizzo:");
+		lblNewLabel_2_4.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2_4.setBounds(493, 688, 200, 37);
+		formToolkit.adapt(lblNewLabel_2_4, true, true);
+		lblNewLabel_2_4.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
-		Button btnNewButton = new Button(grpLeMieAste, SWT.NONE);
-		btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		btnNewButton.setBounds(345, 56, 55, 15);
-		btnNewButton.setText("Visualizza");
-		
-		Label lblAsta_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblAsta_1.setText("Asta2");
-		lblAsta_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblAsta_1.setBounds(10, 75, 55, 15);
-		
-		Label lblTitoloAsta_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblTitoloAsta_1.setText("Titolo: asta2 , Categoria: sport ");
-		lblTitoloAsta_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblTitoloAsta_1.setBounds(10, 95, 223, 15);
-		
-		Label lblAsta_1_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblAsta_1_1.setText("Asta3");
-		lblAsta_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblAsta_1_1.setBounds(10, 115, 55, 15);
-		
-		Label lblTitoloAsta_1_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblTitoloAsta_1_1.setText("Titolo: asta3 , Categoria: tecnologia ");
-		lblTitoloAsta_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblTitoloAsta_1_1.setBounds(10, 136, 223, 15);
-		
-		Label lblAsta_1_1_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblAsta_1_1_1.setText("Asta4");
-		lblAsta_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblAsta_1_1_1.setBounds(10, 154, 55, 15);
-		
-		Label lblTitoloAsta_1_1_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblTitoloAsta_1_1_1.setText("Titolo: asta4 , Categoria abbigliamento\r\n");
-		lblTitoloAsta_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblTitoloAsta_1_1_1.setBounds(10, 175, 223, 15);
-		
-		Label lblAsta_1_1_1_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblAsta_1_1_1_1.setText("Asta5");
-		lblAsta_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblAsta_1_1_1_1.setBounds(10, 196, 55, 15);
-		
-		Label lblTitoloAsta_1_1_1_1 = new Label(grpLeMieAste, SWT.NONE);
-		lblTitoloAsta_1_1_1_1.setText("Titolo: asta5 , Categoria: sport ");
-		lblTitoloAsta_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblTitoloAsta_1_1_1_1.setBounds(10, 217, 223, 15);
-		
-		Button btnNewButton_1 = new Button(grpLeMieAste, SWT.NONE);
-		btnNewButton_1.setText("Visualizza");
-		btnNewButton_1.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		btnNewButton_1.setBounds(345, 96, 55, 15);
-		
-		Button btnNewButton_2 = new Button(grpLeMieAste, SWT.NONE);
-		btnNewButton_2.setText("Visualizza");
-		btnNewButton_2.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		btnNewButton_2.setBounds(345, 136, 55, 15);
-		
-		Button btnNewButton_3 = new Button(grpLeMieAste, SWT.NONE);
-		btnNewButton_3.setText("Visualizza");
-		btnNewButton_3.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		btnNewButton_3.setBounds(345, 175, 55, 15);
-		
-		Button btnNewButton_4 = new Button(grpLeMieAste, SWT.NONE);
-		btnNewButton_4.setText("Visualizza");
-		btnNewButton_4.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		btnNewButton_4.setBounds(310, 217, 55, 15);
-		
-		Button btnNuova = new Button(shell, SWT.NONE);
-		btnNuova.setText("Modifica dati");
-		btnNuova.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		btnNuova.setBounds(549, 22, 55, 15);
-		
-		Label lblDescrizione = new Label(shell, SWT.BORDER);
-		lblDescrizione.setBounds(303, 68, 301, 84);
-		lblDescrizione.setText("Descrizione");
-		
+		Button btnNewButton_1 = formToolkit.createButton(shell, "Modifica Dati", SWT.NONE);
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Modificadati m= new Modificadati();
+				m.setShellProfilo(shell);
+				m.open();
+			}
+		});
+		btnNewButton_1.setBounds(1693, 220, 75, 25);
+		pag.add(pagina);
+		/*Thread timeThread = new Thread() {
+            public void run() {
+                while (true) {
+                    display.syncExec(new Runnable() {
 
+                        @Override
+                        public void run() {
+                        	lblNewLabel_2.setText(Calendar.getInstance().getTime().toString());
+                        }
+                    });
 
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        timeThread.setDaemon(true);
+        timeThread.start();*/
+	}
+	public void mostra(List<Asta> aste,int pp,Group g, Label l1 , Button b1, Label l2, Composite c)
+	{
+		g.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		g.setBounds(480, 200, 1104, 1000);
+		ricA=null;
+		ricU=null;
+		for(int i=0;i<4;i++)
+		{
+			
+			if((pp-1)*4+i<DbMock.getAsteDaMostare().size())
+			{
+				Asta a=aste.get((pp-1)*4+i);
+				Label lblAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
+				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.NORMAL));
+				lblAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
+				lblAsta.setBounds(30, 83+i*200, 166, 32);
+				lblAsta.setText(a.getTitoloAsta());
+				titoli.add(lblAsta);
+				System.out.println(a.getTitoloAsta());
+				
+				Button btnNewButton = new Button(g, SWT.PUSH);
+				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+				btnNewButton.setBounds(743, 83+i*200, 80, 32);
+				bottoni.add(btnNewButton);
+				btnNewButton.setText("Visualizza");
+				btnNewButton.addMouseListener(ma= new MouseAdapter() {
+					@Override
+					public void mouseUp(MouseEvent e) {
+						if(pp==pagina)
+						{
+							if(!ricerca)
+							{
+								VediAsta va= new VediAsta();
+								va.setNomeAsta(a.getTitoloAsta());
+								va.open();
+							}else
+							{
+								System.out.println(current.size());
+								System.out.println(current.get(0).getNomeAsta());
+								System.out.println(count);
+								if(current.size()<=count)
+								current.get(count-1).open();
+							}
+						}
+					}
+				});
+				//btnNewButton.addM
+				Label lblTitoloAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
+				lblTitoloAsta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+				lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
+				lblTitoloAsta.setBounds(30, 138+i*200, 599, 30);
+				descrizioni.add(lblTitoloAsta);
+				lblTitoloAsta.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
+				
+				Composite composite = new Composite(g, SWT.NONE);
+				composite.setBounds(875, 83+i*200, 150, 150);
+				quadrati.add(composite);
+			
+			}
+		}
+		
 	}
 }
 

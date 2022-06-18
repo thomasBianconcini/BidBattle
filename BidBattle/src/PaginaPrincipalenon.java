@@ -92,7 +92,7 @@ public class PaginaPrincipalenon {
 		shell = new Shell(display);
 		shell.setSize(1920, 1080);
 		List<Asta> aste= DbMock.getAsteDaMostare();
-		//shell.setFullScreen(false);
+		shell.setFullScreen(true);
 		shell.setText("PaginaPrincipaleNonAutenticata");
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		Label label = new Label(shell, SWT.SEPARATOR | SWT.VERTICAL);
@@ -157,7 +157,7 @@ public class PaginaPrincipalenon {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				Registrazione registrazione= new Registrazione();
-				shell.close();
+				registrazione.setShellNon(shell);
 				registrazione.open();
 			}
 		});

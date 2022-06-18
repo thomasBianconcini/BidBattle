@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.List;
 public class Utente {
 
@@ -7,7 +8,7 @@ public class Utente {
 	private String password;
 	private String immagineProfilo;
 	private String nomeProfilo;
-	private List<Asta> astePersonali;
+	private List<Asta> astePersonali = new ArrayList<Asta>();
 	private List<Offerta> offerteInCorso;
 	private List<Asta> asteVinte;
 	private Wallet wallet;
@@ -100,5 +101,8 @@ public class Utente {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
-	
+	public void add (Asta a)
+	{
+		astePersonali.add(a);
+	}
 }
