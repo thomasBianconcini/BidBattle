@@ -10,14 +10,10 @@ public class Asta {
 	private LocalDateTime durataAsta;
 	private Prodotto prodotto;
 	private double prezzoIniziale;
-	public double getPrezzoIniziale() {
-		return prezzoIniziale;
-	}
-	public void setPrezzoIniziale(double prezzoIniziale) {
-		this.prezzoIniziale = prezzoIniziale;
-	}
 	private List<Offerta> offerteInCorso = new ArrayList<Offerta>();
 	private String venditore;
+	
+	
 	public Asta(String titolo, String descrizione, LocalDateTime durata, Prodotto prodotto, String venditore, Double prezzo_iniziale)
 	{
 		//bisognerà modificarlo
@@ -81,6 +77,11 @@ public class Asta {
 	public void setVenditore(String venditore) {
 		this.venditore = venditore;
 	}
-	
+	public double getPrezzoIniziale() {
+		return prezzoIniziale;
+	}
+	public void setPrezzoIniziale(double prezzoIniziale) {
+		this.prezzoIniziale = prezzoIniziale;
+	}
 	
 }

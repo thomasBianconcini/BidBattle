@@ -23,6 +23,7 @@ public class FaiOfferta {
 	private String nomeAsta;
 	DbMock db = new DbMock();
 	Shell p;
+	private boolean inHome = true;
 	public String getNomeAsta() {
 		return nomeAsta;
 	}
@@ -79,10 +80,15 @@ public class FaiOfferta {
 		lblNewLabel_2.setBounds(34, 106, 87, 15);
 		lblNewLabel_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_2.setText("Offerta corrente:");
+		
 		Asta a= DbMock.getAstabyTitolo(nomeAsta);
 		Label label = new Label(shell, SWT.NONE);
 		label.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		label.setBounds(166, 106, 33, 15);
+		if(a.getCurrent()==-1)
+		{
+			label.setText(""+a.getPrezzoIniziale());
+		}else
 		label.setText(""+a.getCurrent());
 		
 		Label lblImporto = new Label(shell, SWT.NONE);
@@ -94,23 +100,32 @@ public class FaiOfferta {
 		text.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		text.setBounds(113, 141, 86, 21);
 		Label label_1 = new Label(shell, SWT.NONE);
-		label_1.setBounds(116, 184, 55, 15);
+		label_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		label_1.setBounds(86, 184, 138, 15);
 		Button btnOffri = new Button(shell, SWT.NONE);
 		btnOffri.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				InterazioneAstaController ic= new InterazioneAstaController();
-				Offerta o=ic.inserisciOfferta(a,Double.parseDouble(text.getText()), "ciao");
+				Offerta o=ic.inserisciOfferta(a,Double.parseDouble(text.getText()), DbMock.getCurrentUser().getEmail());
 				if(o==null)
 				{
-					label_1.setText("Inserisci un valore maggiore");
+					label_1.setText("Importo troppo basso");
 				}else
 				{
+					if(inHome)
+					{
+					Home h = new Home();
 					p.close();
 					shell.close();
-					VediAsta va= new VediAsta();
-					va.setNomeAsta(a.getTitoloAsta());
-					va.open();
+					h.open();
+					}else
+					{
+						InterazioneAste ia = new InterazioneAste();
+						p.close();
+						shell.close();
+						ia.open();
+					}
 				}
 			}
 		});
@@ -127,6 +142,14 @@ public class FaiOfferta {
 
 	public void setP(Shell p) {
 		this.p = p;
+	}
+
+	public boolean isInHome() {
+		return inHome;
+	}
+
+	public void setInHome(boolean inHome) {
+		this.inHome = inHome;
 	}
 	
 }

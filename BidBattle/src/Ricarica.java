@@ -4,11 +4,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import controller.GestioneWalletController;
+
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 
 public class Ricarica {
 
@@ -18,7 +23,7 @@ public class Ricarica {
 	private Text text_2;
 	private Text text_3;
 	private Text text_4;
-
+private Shell shellWallet;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -76,14 +81,7 @@ public class Ricarica {
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(34, 174, 148, 21);
 		
-		Button btnOffri = new Button(shell, SWT.NONE);
-		btnOffri.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnOffri.setBounds(133, 292, 49, 25);
-		btnOffri.setText("Ricarica");
+		
 		
 		text_1 = new Text(shell, SWT.BORDER);
 		text_1.setBounds(34, 117, 148, 21);
@@ -111,7 +109,32 @@ public class Ricarica {
 		
 		text_4 = new Text(shell, SWT.BORDER);
 		text_4.setBounds(34, 294, 49, 21);
+		Button btnOffri = new Button(shell, SWT.NONE);
+		btnOffri.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				if(!text_1.getText().isEmpty() && !text_2.getText().isEmpty() && !text_3.getText().isEmpty()&& !text.getText().isEmpty())
+				{
+					GestioneWalletController gc = new  GestioneWalletController();
+					gc.ricarica(Double.parseDouble(text_4.getText()), "euro");
+					Wallet w = new Wallet();
+					shell.close();
+					w.open();
+				}
+				
+			}
+		});
 
+		btnOffri.setBounds(133, 292, 49, 25);
+		btnOffri.setText("Ricarica");
+	}
+
+	public Shell getShellWallet() {
+		return shellWallet;
+	}
+
+	public void setShellWallet(Shell shellWallet) {
+		this.shellWallet = shellWallet;
 	}
 
 }

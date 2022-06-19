@@ -7,6 +7,7 @@ import java.util.List;
 import model.Asta;
 import model.DbMock;
 import model.Offerta;
+import model.Utente;
 
 public class InterazioneAstaController {
 DbMock db = new DbMock();
@@ -15,6 +16,7 @@ List<Asta> aste= DbMock.getAsteDaMostare();
 public InterazioneAstaController() {};
 	 public Offerta inserisciOfferta(Asta asta, double importo, String email)
 	 {
+		 List<Asta> asteUtente= DbMock.getAsteFromVenditore(asta.getVenditore());
 		 Asta elimina=null;
 		 Asta inserisci = null;
 		 Offerta res = null;
@@ -26,6 +28,12 @@ public InterazioneAstaController() {};
 				 {
 					 elimina=a;
 					 res= new Offerta(importo,email,asta);
+					 String emailDaRimborsare= a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getUtente();
+					 System.out.println(emailDaRimborsare);
+					 Utente u= DbMock.getUtente(emailDaRimborsare);
+					 System.out.println(u.getWallet().getSaldo());
+					 u.getWallet().setSaldo(u.getWallet().getSaldo()+a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getPrezzo());
+					 System.out.println(u.getWallet().getSaldo());
 					 a.inserisci(res);
 				 }
 				 else
@@ -42,6 +50,10 @@ public InterazioneAstaController() {};
 		 }
 		 aste.remove(elimina);
 		 aste.add(inserisci);
+		 asteUtente.remove(elimina);
+		 asteUtente.add(inserisci);
+		 DbMock.getCurrentUser().getWallet().setSaldo( DbMock.getCurrentUser().getWallet().getSaldo()-importo);
+		 DbMock.getUtente(email).getOfferteInCorso().add(res);
 		 return res;
 	}
 	 public void add(Asta a)

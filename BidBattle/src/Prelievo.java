@@ -4,12 +4,17 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import controller.GestioneWalletController;
+
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 
 public class Prelievo {
 
@@ -17,7 +22,7 @@ public class Prelievo {
 	private Text text;
 	private Text text_1;
 	private Text text_4;
-
+private Shell walletShell;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -74,11 +79,29 @@ public class Prelievo {
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(34, 174, 216, 21);
+		Combo combo = new Combo(shell, SWT.NONE);
+		combo.setItems(new String[] {"Euro", "Dollaro", "Pound"});
+		combo.setBounds(148, 232, 68, 23);
 		
 		Button btnOffri = new Button(shell, SWT.NONE);
+		btnOffri.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				
+			}
+		});
 		btnOffri.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				if(!text_1.getText().isEmpty() && !text.getText().isEmpty())
+				{
+					GestioneWalletController gc = new  GestioneWalletController();
+					gc.prelievo(Double.parseDouble(text_4.getText()), combo.getText());
+					Wallet w = new Wallet();
+					shell.close();
+					w.open();
+				}
+			
 			}
 		});
 		btnOffri.setBounds(34, 274, 49, 25);
@@ -100,9 +123,15 @@ public class Prelievo {
 		lblValuta.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblValuta.setBounds(163, 204, 68, 15);
 		
-		Combo combo = new Combo(shell, SWT.NONE);
-		combo.setBounds(148, 232, 68, 23);
+		
+	}
 
+	public Shell getWalletShell() {
+		return walletShell;
+	}
+
+	public void setWalletShell(Shell walletShell) {
+		this.walletShell = walletShell;
 	}
 
 }

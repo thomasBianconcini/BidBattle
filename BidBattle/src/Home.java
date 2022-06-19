@@ -8,6 +8,8 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.ibm.icu.impl.coll.CollationWeights;
+
 import controller.HomeNonAutenticataController;
 import model.Asta;
 import model.DbMock;
@@ -47,6 +49,7 @@ public class Home {
 	private boolean ricerca=false;
 	List<VediAsta> current=  new ArrayList<VediAsta>();
 	private int count =0;
+	private Shell toOpen=null;
 	/**
 	/**
 	 * Launch the application.
@@ -125,9 +128,9 @@ public class Home {
 		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				Registrazione registrazione= new Registrazione();
+				InterazioneAste ia= new InterazioneAste();
 				shell.close();
-				registrazione.open();
+				ia.open();
 			}
 		});
 		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
@@ -286,6 +289,14 @@ public class Home {
 		lblNewLabel_1_1_1.setBounds(153, 577, 78, 37);
 		
 		Label lblNewLabel_1_1_1_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1_1_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Wallet w= new Wallet();
+				shell.close();
+				w.open();
+			}
+		});
 		lblNewLabel_1_1_1_1.setText("Wallet");
 		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -305,6 +316,15 @@ public class Home {
 		lblNewLabel_1_1_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1_1_2.setBounds(108, 855, 167, 37);
 		pag.add(pagina);
+		
+		Label saldo = new Label(shell, SWT.BORDER);
+		saldo.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		saldo.setBounds(1680, 10, 217, 37);
+		saldo.setText("Il mio saldo "+DbMock.getCurrentUser().getWallet().getSaldo()+"");
+		saldo.setBackground(SWTResourceManager.getColor(230, 230, 250));
+		
+		/*if(!(toOpen ==null))
+			toOpen.open();*/
 		/*Thread timeThread = new Thread() {
             public void run() {
                 while (true) {
@@ -346,7 +366,6 @@ public class Home {
 				lblAsta.setBounds(30, 83+i*200, 166, 32);
 				lblAsta.setText(a.getTitoloAsta());
 				titoli.add(lblAsta);
-				System.out.println(a.getTitoloAsta());
 				
 				Button btnNewButton = new Button(g, SWT.PUSH);
 				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
@@ -361,13 +380,14 @@ public class Home {
 							if(!ricerca)
 							{
 								VediAsta va= new VediAsta();
+								va.setInHome(true);
+								System.out.println(a.getVenditore()+ "ggggg" +DbMock.getCurrentUser().getEmail() );
+								if(a.getVenditore().equals(DbMock.getCurrentUser().getEmail()))
+									va.setOffri(false);
 								va.setNomeAsta(a.getTitoloAsta());
 								va.open();
 							}else
 							{
-								System.out.println(current.size());
-								System.out.println(current.get(0).getNomeAsta());
-								System.out.println(count);
 								if(current.size()<=count)
 								current.get(count-1).open();
 							}
@@ -461,7 +481,7 @@ public class Home {
 					Asta a= aste.get((pagina-1)*4+i);
 					va.setNomeAsta(a.getTitoloAsta());
 					l1.setText(a.getTitoloAsta());
-					l2.setText(a.getTitoloAsta());
+					l2.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
 					b.setVisible(true);
 					c.setVisible(true);
 					b.setText("Visualizza");
@@ -472,7 +492,9 @@ public class Home {
 						public void mouseUp(MouseEvent e) {
 							if(pp==pagina)
 							{
-							va.open();
+								if(a.getVenditore().equals(DbMock.getCurrentUser().getEmail()))
+									va.setOffri(false);
+								va.open();
 							}
 						}
 					});
@@ -526,6 +548,14 @@ public class Home {
 				c.setVisible(false);
 			}
 		}
+	}
+
+	public Shell getToOpen() {
+		return toOpen;
+	}
+
+	public void setToOpen(Shell toOpen) {
+		this.toOpen = toOpen;
 	}
 	
 }

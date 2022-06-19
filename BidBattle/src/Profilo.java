@@ -128,7 +128,9 @@ public class Profilo {
 		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
+				InterazioneAste ia= new InterazioneAste();
+				shell.close();
+				ia.open();
 			}
 		});
 		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
@@ -143,7 +145,6 @@ public class Profilo {
 		Button btnNewButton = null;
 		Label lblTitoloAsta = null;
 		
-	
 		
 		Label label_1_1_1 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -176,7 +177,14 @@ public class Profilo {
 		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1_1_1.setBounds(153, 716, 78, 37);
-		
+		lblNewLabel_1_1_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Wallet w= new Wallet();
+				shell.close();
+				w.open();
+			}
+		});
 		Label lblNewLabel_1_1_1_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -277,6 +285,13 @@ public class Profilo {
 		});
 		btnNewButton_1.setBounds(1693, 220, 75, 25);
 		pag.add(pagina);
+		
+		Label saldo = new Label(shell, SWT.BORDER);
+		saldo.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		saldo.setBounds(1680, 10, 217, 37);
+		formToolkit.adapt(saldo, true, true);
+		saldo.setText("Il mio saldo "+DbMock.getCurrentUser().getWallet().getSaldo()+"");
+		saldo.setBackground(SWTResourceManager.getColor(230, 230, 250));
 		/*Thread timeThread = new Thread() {
             public void run() {
                 while (true) {

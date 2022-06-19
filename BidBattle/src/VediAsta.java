@@ -27,6 +27,8 @@ public class VediAsta {
 	protected Shell shell;
 	private String nomeAsta;
 	DbMock db= new DbMock();
+	private boolean inHome= true;
+	private boolean offri= true;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -99,6 +101,7 @@ public class VediAsta {
 		Label lblNewLabel_6 = new Label(grpProdotto, SWT.NONE);
 		lblNewLabel_6.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_6.setBounds(10, 66, 118, 15);
+		System.out.println(a.toString());
 		lblNewLabel_6.setText(a.getProdotto().getTitolo());
 		
 		Label lblNewLabel_6_1 = new Label(grpProdotto, SWT.NONE);
@@ -120,13 +123,12 @@ public class VediAsta {
 		lblTermineAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblTermineAsta.setBounds(189, 476, 66, 15);
 		lblTermineAsta.setText("Termine asta");
-		
 		Button btnCreaAsta = new Button(shell, SWT.NONE);
 		btnCreaAsta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				shell.close();
 				FaiOfferta off= new FaiOfferta();
+				off.setInHome(inHome);
 				off.setNomeAsta(a.getTitoloAsta());
 				off.setP(shell);
 				off.open();
@@ -135,6 +137,14 @@ public class VediAsta {
 		btnCreaAsta.setBounds(189, 539, 75, 25);
 		btnCreaAsta.setText("Offri");
 		
+
+		System.out.print("Vedi asta "+ offri  + " tttt " + a.getTitoloAsta()); 
+		
+		if(!offri)
+			btnCreaAsta.setVisible(false);
+		
+		if(DbMock.isOver(a))
+			btnCreaAsta.setVisible(false);
 		Label lblOffertaScontantaPallone = new Label(shell, SWT.NONE);
 		lblOffertaScontantaPallone.setForeground(SWTResourceManager.getColor(0, 0, 0));
 		lblOffertaScontantaPallone.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
@@ -162,12 +172,28 @@ public class VediAsta {
 
 	}
 
+	public boolean isInHome() {
+		return inHome;
+	}
+
+	public void setInHome(boolean inHome) {
+		this.inHome = inHome;
+	}
+
 	public String getNomeAsta() {
 		return nomeAsta;
 	}
 
 	public void setNomeAsta(String nomeAsta) {
 		this.nomeAsta = nomeAsta;
+	}
+
+	public boolean isOffri() {
+		return offri;
+	}
+
+	public void setOffri(boolean offri) {
+		this.offri = offri;
 	}
 	
 }

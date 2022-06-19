@@ -9,8 +9,8 @@ public class Utente {
 	private String immagineProfilo;
 	private String nomeProfilo;
 	private List<Asta> astePersonali = new ArrayList<Asta>();
-	private List<Offerta> offerteInCorso;
-	private List<Asta> asteVinte;
+	private List<Offerta> offerteInCorso= new ArrayList<Offerta>();
+	private List<Asta> asteVinte= new ArrayList<Asta>();
 	private Wallet wallet;
 	private String descrizione;
 	
@@ -104,5 +104,31 @@ public class Utente {
 	public void add (Asta a)
 	{
 		astePersonali.add(a);
+	}
+	public List<Asta> getInterazione()
+	{
+		List<Asta> res= new ArrayList<Asta>();
+		System.out.println(offerteInCorso.size());
+		for(Offerta o : offerteInCorso)
+		{
+			Asta a= o.getAsta();
+			res.add(a);
+		}
+		for(Asta asta: asteVinte)
+		{
+			res.add(asta);
+		}
+		return res;
+	}
+	public List<String> getMovimenti()
+	{
+		List<String> res= new ArrayList<String>();
+		for(Ricarica r: wallet.getListaRicariche())
+			res.add(r.toString());
+		
+		for(Prelievo p: wallet.getListaPrelievi())
+			res.add(p.toString());
+		
+		return res;
 	}
 }

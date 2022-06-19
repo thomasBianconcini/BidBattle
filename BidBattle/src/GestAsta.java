@@ -76,6 +76,12 @@ public class GestAsta {
 	protected void createContents() {
 		shell = new Shell(display);
 		shell.setSize(1920, 1080);
+		Label saldo = new Label(shell, SWT.BORDER);
+		saldo.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		saldo.setBounds(1680, 10, 217, 37);
+		formToolkit.adapt(saldo, true, true);
+		saldo.setText("Il mio saldo "+DbMock.getCurrentUser().getWallet().getSaldo()+"");
+		saldo.setBackground(SWTResourceManager.getColor(230, 230, 250));
 		List<Asta> aste= DbMock.getAsteDaMostare();
 		shell.setFullScreen(true);
 		shell.setText("PaginaPrincipaleNonAutenticata");
@@ -119,7 +125,9 @@ public class GestAsta {
 		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-	
+				InterazioneAste ia= new InterazioneAste();
+				shell.close();
+				ia.open();
 			}
 		});
 		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
@@ -167,7 +175,14 @@ public class GestAsta {
 		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1_1_1.setBounds(153, 716, 78, 37);
-		
+		lblNewLabel_1_1_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Wallet w= new Wallet();
+				shell.close();
+				w.open();
+			}
+		});
 		Label lblNewLabel_1_1_1_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_2.setText("Gestione Asta");
 		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
@@ -272,7 +287,6 @@ public class GestAsta {
 				lblAsta.setBounds(30, 83+i*200, 166, 32);
 				lblAsta.setText(a.getTitoloAsta());
 				titoli.add(lblAsta);
-				System.out.println(a.getTitoloAsta());
 				
 				Button btnNewButton = new Button(g, SWT.PUSH);
 				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
@@ -285,6 +299,7 @@ public class GestAsta {
 						if(pp==pagina)
 						{
 								VediAsta va= new VediAsta();
+								va.setOffri(false);
 								va.setNomeAsta(a.getTitoloAsta());
 								va.open();
 						}
@@ -345,6 +360,7 @@ public class GestAsta {
 					public void mouseUp(MouseEvent e) {
 						if(pp==pagina)
 						{
+							va.setOffri(false);
 						va.open();
 						}
 					}

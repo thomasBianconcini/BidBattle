@@ -2,6 +2,10 @@ package model;
 import java.time.LocalDateTime;
 
 public class Ricarica {
+	@Override
+	public String toString() {
+		return "Movimento: Ricarica importo= " + importo + " | divisa= " + divisa + " | data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();	}
+
 	private int id;
 	private double importo;
 	private String divisa;
@@ -10,6 +14,12 @@ public class Ricarica {
 	public Ricarica(double prezzo,String divisa){
 		this.importo=prezzo;
 		this.divisa=divisa;
+		data= LocalDateTime.now();
+	}
+	public Ricarica(double prezzo,String divisa,LocalDateTime ldt){
+		this.importo=prezzo;
+		this.divisa=divisa;
+		data=ldt;
 	}
 
 	public Ricarica() {

@@ -331,8 +331,6 @@ public class PaginaPrincipalenon {
 				lblAsta.setBounds(30, 83+i*200, 166, 32);
 				lblAsta.setText(a.getTitoloAsta());
 				titoli.add(lblAsta);
-				System.out.println(a.getTitoloAsta());
-				
 				Button btnNewButton = new Button(g, SWT.PUSH);
 				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
 				btnNewButton.setBounds(743, 83+i*200, 80, 32);
@@ -350,9 +348,6 @@ public class PaginaPrincipalenon {
 								va.open();
 							}else
 							{
-								System.out.println(current.size());
-								System.out.println(current.get(0).getNomeAsta());
-								System.out.println(count);
 								if(current.size()<=count)
 								current.get(count-1).open();
 							}
@@ -446,7 +441,7 @@ public class PaginaPrincipalenon {
 					Asta a= aste.get((pagina-1)*4+i);
 					va.setNomeAsta(a.getTitoloAsta());
 					l1.setText(a.getTitoloAsta());
-					l2.setText(a.getTitoloAsta());
+					l2.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
 					b.setVisible(true);
 					c.setVisible(true);
 					b.setText("Visualizza");
