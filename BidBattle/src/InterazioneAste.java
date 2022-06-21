@@ -92,7 +92,19 @@ public class InterazioneAste {
 		label_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		label_1.setBounds(-11, 384, p.x*20/100, 2);
 		
-		
+		Button btnNewButton_3 = new Button(shell, SWT.NONE);
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				PaginaPrincipalenon pp= new PaginaPrincipalenon();
+				shell.close();
+				pp.open();
+			}
+		});
+		btnNewButton_3.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+		btnNewButton_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnNewButton_3.setBounds(1570, 10, 104, 37);
+		btnNewButton_3.setText("Logout");
 		Label label_1_1 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		label_1_1.setBounds(-11, 523, 384, 2);
@@ -113,7 +125,7 @@ public class InterazioneAste {
 				h.open();
 			}
 		});
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel.setBounds(153, 438, 78, 37);
 		lblNewLabel.setText("Home");
@@ -125,10 +137,10 @@ public class InterazioneAste {
 	
 			}
 		});
-		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1.setText("Interazione Asta");
-		lblNewLabel_1_1.setBounds(100, 994, 190, 37);
+		lblNewLabel_1_1.setBounds(100, 994, 217, 37);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setBounds(0, 0, 382, 382);
@@ -161,15 +173,15 @@ public class InterazioneAste {
 			}
 		});
 		lblNewLabel_1_1_1.setText("Profilo");
-		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1.setBounds(153, 577, 78, 37);
+		lblNewLabel_1_1_1.setBounds(153, 577, 97, 37);
 		
 		Label lblNewLabel_1_1_1_1 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_1.setText("Wallet");
-		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_1.setBounds(153, 716, 78, 37);
+		lblNewLabel_1_1_1_1.setBounds(153, 716, 137, 37);
 		lblNewLabel_1_1_1_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -181,9 +193,9 @@ public class InterazioneAste {
 		
 		Label lblNewLabel_1_1_1_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_2.setText("Gestione Asta");
-		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_2.setBounds(108, 855, 167, 37);
+		lblNewLabel_1_1_1_2.setBounds(108, 855, 182, 37);
 		lblNewLabel_1_1_1_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -195,7 +207,7 @@ public class InterazioneAste {
 		
 		Label lblNomeutente = new Label(shell, SWT.NONE);
 		lblNomeutente.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.NORMAL));
+		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.BOLD));
 		lblNomeutente.setBounds(882, 123, 300, 37);
 		lblNomeutente.setText("Interazione Asta");
 		Group grpLeMieAste = new Group(shell, SWT.BORDER);
@@ -281,14 +293,14 @@ public class InterazioneAste {
 			{
 				Asta a=aste.get((pp-1)*4+i);
 				Label lblAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
-				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.NORMAL));
+				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.BOLD));
 				lblAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-				lblAsta.setBounds(30, 83+i*200, 166, 32);
+				lblAsta.setBounds(30, 83+i*200, 500, 40);
 				lblAsta.setText(a.getTitoloAsta());
 				titoli.add(lblAsta);
 				
 				Button btnNewButton = new Button(g, SWT.PUSH);
-				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 8, SWT.NORMAL));
 				btnNewButton.setBounds(743, 83+i*200, 80, 32);
 				bottoni.add(btnNewButton);
 				btnNewButton.setText("Visualizza");
@@ -308,9 +320,9 @@ public class InterazioneAste {
 				Label lblTitoloAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblTitoloAsta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 				lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-				lblTitoloAsta.setBounds(30, 138+i*200, 599, 30);
+				lblTitoloAsta.setBounds(30, 138+i*200, 750, 65);
 				descrizioni.add(lblTitoloAsta);
-				lblTitoloAsta.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
+				lblTitoloAsta.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria());
 				
 				Composite composite = new Composite(g, SWT.NONE);
 				composite.setBounds(875, 83+i*200, 150, 150);
@@ -333,6 +345,9 @@ public class InterazioneAste {
 					else
 						composite2.setBackground(SWTResourceManager.getColor(255, 69, 0));
 				}
+				if(!a.getProdotto().getImmagine().equals(""))
+					composite.setBackgroundImage(new Image(display,a.getProdotto().getImmagine()));
+			
 				colori.add(composite2);
 			}
 		}
@@ -366,11 +381,14 @@ public class InterazioneAste {
 				Asta a= aste.get((pagina-1)*4+i);
 				va.setNomeAsta(a.getTitoloAsta());
 				l1.setText(a.getTitoloAsta());
-				l2.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
+				l2.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria());
 				b.setVisible(true);
 				c.setVisible(true);
 				colour.setVisible(true);
 				b.setText("Visualizza");
+				if(!a.getProdotto().getImmagine().equals(""))
+					c.setBackgroundImage(new Image(display,a.getProdotto().getImmagine()));
+				
 				if(a.getDurataAsta().isBefore(LocalDateTime.now()))
 				{
 					colour.setBackground(SWTResourceManager.getColor(173, 255, 47));

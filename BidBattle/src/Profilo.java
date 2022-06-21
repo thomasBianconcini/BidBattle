@@ -119,7 +119,7 @@ public class Profilo {
 				h.open();
 			}
 		});
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel.setBounds(153, 438, 78, 37);
 		lblNewLabel.setText("Home");
@@ -133,10 +133,10 @@ public class Profilo {
 				ia.open();
 			}
 		});
-		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1.setText("Interazione Asta");
-		lblNewLabel_1_1.setBounds(100, 994, 190, 37);
+		lblNewLabel_1_1.setBounds(100, 994, 217, 37);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setBounds(0, 0, 382, 382);
@@ -168,15 +168,15 @@ public class Profilo {
 			}
 		});
 		lblNewLabel_1_1_1.setText("Profilo");
-		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1.setBounds(153, 577, 78, 37);
+		lblNewLabel_1_1_1.setBounds(153, 577, 122, 37);
 		
 		Label lblNewLabel_1_1_1_1 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_1.setText("Wallet");
-		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_1.setBounds(153, 716, 78, 37);
+		lblNewLabel_1_1_1_1.setBounds(153, 716, 101, 37);
 		lblNewLabel_1_1_1_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -195,13 +195,13 @@ public class Profilo {
 			}
 		});
 		lblNewLabel_1_1_1_2.setText("Gestione Asta");
-		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_2.setBounds(108, 855, 167, 37);
+		lblNewLabel_1_1_1_2.setBounds(108, 855, 182, 37);
 		
 		Label lblNomeutente = new Label(shell, SWT.NONE);
 		lblNomeutente.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.NORMAL));
+		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.BOLD));
 		lblNomeutente.setBounds(882, 123, 300, 56);
 		if(DbMock.getCurrentUser().getNomeProfilo()==null)
 		{
@@ -211,23 +211,36 @@ public class Profilo {
 		
 		
 		Composite composite_1 = formToolkit.createComposite(shell, SWT.NONE);
-		composite_1.setBounds(480, 220, 200, 200);
+		composite_1.setBounds(480, 220, 150, 150);
 		formToolkit.paintBordersFor(composite_1);
+		composite_1.setBackgroundImage(new Image(display,DbMock.getCurrentUser().getImmagineProfilo()));
 		
 		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
 		lblNewLabel_1.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblNewLabel_1.setForeground(SWTResourceManager.getColor(220, 220, 220));
 		lblNewLabel_1.setBackground(SWTResourceManager.getColor(211, 211, 211));
-		lblNewLabel_1.setBounds(742, 220, 842, 200);
+		lblNewLabel_1.setBounds(667, 220, 917, 150);
 		if(DbMock.getCurrentUser().getDescrizione()==null)
 		{
 			lblNewLabel_1.setText("Descrizione");
 		}else
 		lblNewLabel_1.setText(DbMock.getCurrentUser().getDescrizione());
 		formToolkit.adapt(lblNewLabel_1, true, true);
-		
+		Button btnNewButton_3 = new Button(shell, SWT.NONE);
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				PaginaPrincipalenon pp= new PaginaPrincipalenon();
+				shell.close();
+				pp.open();
+			}
+		});
+		btnNewButton_3.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+		btnNewButton_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnNewButton_3.setBounds(1570, 10, 104, 37);
+		btnNewButton_3.setText("Logout");
 		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
-		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
 		lblNewLabel_2.setBounds(493, 488, 200, 37);
 		formToolkit.adapt(lblNewLabel_2, true, true);
 		lblNewLabel_2.setText("Email:");
@@ -251,7 +264,7 @@ public class Profilo {
 		
 		Label lblNewLabel_2_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_2_2.setText("Password:");
-		lblNewLabel_2_2.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2_2.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
 		lblNewLabel_2_2.setBounds(490, 584, 190, 37);
 		formToolkit.adapt(lblNewLabel_2_2, true, true);
 		lblNewLabel_2_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -269,12 +282,13 @@ public class Profilo {
 		
 		Label lblNewLabel_2_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_2_4.setText("Indirizzo:");
-		lblNewLabel_2_4.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblNewLabel_2_4.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
 		lblNewLabel_2_4.setBounds(493, 688, 200, 37);
 		formToolkit.adapt(lblNewLabel_2_4, true, true);
 		lblNewLabel_2_4.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
 		Button btnNewButton_1 = formToolkit.createButton(shell, "Modifica Dati", SWT.NONE);
+		btnNewButton_1.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -283,7 +297,7 @@ public class Profilo {
 				m.open();
 			}
 		});
-		btnNewButton_1.setBounds(1693, 220, 75, 25);
+		btnNewButton_1.setBounds(1658, 220, 110, 37);
 		pag.add(pagina);
 		
 		Label saldo = new Label(shell, SWT.BORDER);

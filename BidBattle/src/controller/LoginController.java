@@ -24,7 +24,7 @@ public boolean verificaAccesso(String email,String pass)
 		{
 			if(u.getPassword().equals(pass))
 			{
-				DbMock.setCurrentUser(u);
+				DbMock.setCurrent(u);
 				return true;
 			}	
 		}

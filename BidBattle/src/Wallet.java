@@ -191,7 +191,7 @@ public class Wallet {
 		
 		Label lblNomeutente = new Label(shell, SWT.NONE);
 		lblNomeutente.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.NORMAL));
+		lblNomeutente.setFont(SWTResourceManager.getFont("Segoe UI", 25, SWT.BOLD));
 		lblNomeutente.setBounds(920, 123, 262, 37);
 		lblNomeutente.setText("Il mio Wallet");
 		Group grpLeMieAste = new Group(shell, SWT.BORDER);
@@ -272,7 +272,19 @@ public class Wallet {
 		formToolkit.adapt(lblNewLabel_1, true, true);
 		lblNewLabel_1.setText("Il mio saldo "+DbMock.getCurrentUser().getWallet().getSaldo()+"");
 		lblNewLabel_1.setBackground(SWTResourceManager.getColor(230, 230, 250));
-		
+		Button btnNewButton_3 = new Button(shell, SWT.NONE);
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				PaginaPrincipalenon pp= new PaginaPrincipalenon();
+				shell.close();
+				pp.open();
+			}
+		});
+		btnNewButton_3.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+		btnNewButton_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnNewButton_3.setBounds(1570, 10, 104, 37);
+		btnNewButton_3.setText("Logout");
 		/*Thread timeThread = new Thread() {
             public void run() {
                 while (true) {
@@ -315,7 +327,7 @@ public class Wallet {
 				Label lblTitoloAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblTitoloAsta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 				lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-				lblTitoloAsta.setBounds(30, 138+i*200, 900, 30);
+				lblTitoloAsta.setBounds(30, 138+i*200, 900, 65);
 				descrizioni.add(lblTitoloAsta);
 				lblTitoloAsta.setText(a);
 				

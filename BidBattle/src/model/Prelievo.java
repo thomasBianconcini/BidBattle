@@ -6,7 +6,7 @@ import com.ibm.icu.util.LocalePriorityList;
 public class Prelievo {
 @Override
 	public String toString() {
-		return "Movimento: Prelievo importo= " + importo + " | divisa= " + divisa + " | data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();
+		return "Movimento: Prelievo\nImporto= " + importo + " | Divisa= " + divisa + " | Data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();
 	}
 private int id;
 private double importo;

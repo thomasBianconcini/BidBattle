@@ -74,66 +74,73 @@ private Shell shellGestioneAsta;
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		shell.setSize(633, 653);
-		shell.setText("SWT Application");
+		shell.setText("Crea Asta");
 		shell.setLayout(null);
 		
 		Label lblCreaasta = new Label(shell, SWT.NONE);
 		lblCreaasta.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblCreaasta.setForeground(SWTResourceManager.getColor(0, 0, 0));
-		lblCreaasta.setBounds(66, 50, 77, 28);
-		lblCreaasta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblCreaasta.setBounds(258, 41, 118, 45);
+		lblCreaasta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.BOLD));
 		lblCreaasta.setText("CreaAsta");
 		
 		Label lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel.setBounds(66, 83, 33, 15);
+		lblNewLabel.setBounds(66, 83, 46, 15);
 		lblNewLabel.setText("Titolo:");
 		
 		text = new Text(shell, SWT.BORDER);
-		text.setBounds(66, 103, 162, 21);
+		text.setBounds(66, 103, 220, 21);
 		
 		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblNewLabel_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1.setBounds(66, 129, 63, 15);
+		lblNewLabel_1.setBounds(66, 129, 80, 15);
 		lblNewLabel_1.setText("Descrizione:");
 		
 		text_1 = new Text(shell, SWT.BORDER);
 		text_1.setBounds(66, 149, 481, 21);
 		
 		Group grpProdotto = new Group(shell, SWT.SHADOW_ETCHED_IN);
+		grpProdotto.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		grpProdotto.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		grpProdotto.setBounds(66, 175, 481, 255);
 		grpProdotto.setText("Prodotto");
 		
 		Label lblNewLabel_2 = new Label(grpProdotto, SWT.NONE);
+		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblNewLabel_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_2.setBounds(10, 43, 55, 15);
-		lblNewLabel_2.setText("TItolo");
+		lblNewLabel_2.setText("TItolo:");
 		
 		text_2 = new Text(grpProdotto, SWT.BORDER);
 		text_2.setBounds(10, 64, 76, 21);
 		
 		Label lblNewLabel_3 = new Label(grpProdotto, SWT.NONE);
+		lblNewLabel_3.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblNewLabel_3.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_3.setBounds(10, 91, 94, 15);
-		lblNewLabel_3.setText("Descrizione");
+		lblNewLabel_3.setText("Descrizione:");
 		
 		text_3 = new Text(grpProdotto, SWT.BORDER);
 		text_3.setBounds(10, 112, 118, 21);
 		
 		Label lblCategoria = new Label(grpProdotto, SWT.NONE);
+		lblCategoria.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblCategoria.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblCategoria.setBounds(10, 144, 55, 15);
-		lblCategoria.setText("Categoria");
+		lblCategoria.setBounds(10, 144, 76, 15);
+		lblCategoria.setText("Categoria:");
 		
 		Combo combo = new Combo(grpProdotto, SWT.NONE);
 		combo.setItems(new String[] {"Sport", "Tecnologia", "Abbigliamento", "Motori"});
 		combo.setBounds(10, 165, 91, 23);
 		
 		Label lblImmagine = new Label(grpProdotto, SWT.NONE);
+		lblImmagine.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblImmagine.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblImmagine.setBounds(230, 43, 55, 15);
-		lblImmagine.setText("Immagine");
+		lblImmagine.setBounds(230, 43, 76, 15);
+		lblImmagine.setText("Immagine:");
 		
 		Group group = new Group(grpProdotto, SWT.NONE);
 		group.setBackground(SWTResourceManager.getColor(240, 255, 255));
@@ -142,22 +149,25 @@ private Shell shellGestioneAsta;
 		DropTarget dropTarget = new DropTarget(group, DND.DROP_MOVE);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
+		lblNewLabel_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblNewLabel_4.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_4.setBounds(66, 435, 95, 15);
-		lblNewLabel_4.setText("Prezzo di partenza");
+		lblNewLabel_4.setBounds(66, 435, 118, 15);
+		lblNewLabel_4.setText("Prezzo di partenza:");
 		
 		text_4 = new Text(shell, SWT.BORDER);
 		text_4.setBounds(66, 455, 481, 21);
 		
 		Label lblTermineAsta = new Label(shell, SWT.NONE);
+		lblTermineAsta.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblTermineAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblTermineAsta.setBounds(66, 481, 66, 15);
-		lblTermineAsta.setText("Termine asta");
+		lblTermineAsta.setBounds(66, 481, 80, 15);
+		lblTermineAsta.setText("Termine asta:");
 		
 		DateTime dateTime = new DateTime(shell, SWT.BORDER);
 		dateTime.setBounds(66, 501, 80, 24);
 		
 		Label lblOraminuti = new Label(shell, SWT.NONE);
+		lblOraminuti.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblOraminuti.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblOraminuti.setBounds(152, 481, 76, 15);
 		lblOraminuti.setText("Ora:minuti");
@@ -181,7 +191,16 @@ private Shell shellGestioneAsta;
 				int minuti =Integer.parseInt(st.nextToken());
 				LocalDateTime  fineAsta= LocalDateTime.of(dateTime.getYear(),dateTime.getMonth(),dateTime.getDay(),ora,minuti);
 				GestioneAstaController gac= new GestioneAstaController();
-				Prodotto p = new Prodotto(titoloProdotto, descrizioneProdotto, categoria, " ");
+				String img="nero.jpg";
+				if(false)
+				{
+					// input dell'immgine
+				}else
+				{
+					img="nero.jpg";
+				}
+				
+				Prodotto p = new Prodotto(titoloProdotto, descrizioneProdotto, categoria,img );
 				String [] toCreate= new String[]{
 						titoloAsta,descrizioneAsta,DbMock.getCurrentUser().getEmail()
 				};

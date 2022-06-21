@@ -57,36 +57,39 @@ public class Login {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		shell.setSize(994, 729);
-		shell.setText("SWT Application");
+		shell.setSize(673, 423);
+		shell.setText("Login");
 		shell.setLayout(null);
 		
 		Label lblLogin = new Label(shell, SWT.NONE);
-		lblLogin.setBounds(339, 109, 117, 28);
+		lblLogin.setBounds(262, 61, 117, 87);
 		lblLogin.setText("Login");
 		lblLogin.setForeground(SWTResourceManager.getColor(255, 127, 80));
-		lblLogin.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblLogin.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblLogin.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
 		Label lblEmail = new Label(shell, SWT.NONE);
-		lblEmail.setBounds(185, 150, 32, 15);
+		lblEmail.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblEmail.setBounds(100, 133, 32, 15);
 		lblEmail.setText("Email:");
 		lblEmail.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
 		text = new Text(shell, SWT.BORDER);
-		text.setBounds(185, 180, 439, 21);
+		text.setBounds(100, 163, 439, 21);
 		
 		Label lblPassword = new Label(shell, SWT.NONE);
-		lblPassword.setBounds(185, 210, 53, 15);
+		lblPassword.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblPassword.setBounds(100, 193, 53, 15);
 		lblPassword.setText("Password:");
 		lblPassword.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
 		text_1 = new Text(shell, SWT.BORDER | SWT.PASSWORD);
-		text_1.setBounds(185, 240, 439, 21);
+		text_1.setBounds(100, 223, 439, 21);
 		Label lblNewLabel = new Label(shell, SWT.NONE);
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel.setBounds(303, 285, 306, 21);
+		lblNewLabel.setBounds(218, 268, 306, 21);
 		Button btnLogin = new Button(shell, SWT.NONE);
+		btnLogin.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -104,7 +107,7 @@ public class Login {
 				}
 			}
 		});
-		btnLogin.setBounds(185, 280, 75, 25);
+		btnLogin.setBounds(100, 263, 75, 25);
 		btnLogin.setForeground(SWTResourceManager.getColor(255, 69, 0));
 		btnLogin.setText("Login");
 		

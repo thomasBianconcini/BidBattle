@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 public class Ricarica {
 	@Override
 	public String toString() {
-		return "Movimento: Ricarica importo= " + importo + " | divisa= " + divisa + " | data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();	}
+		return "Movimento: Ricarica\nImporto= " + importo + " | Divisa= " + divisa + " | Data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();	}
 
 	private int id;
 	private double importo;

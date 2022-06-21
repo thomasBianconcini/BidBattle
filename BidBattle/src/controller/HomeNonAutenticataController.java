@@ -33,11 +33,11 @@ public List<Asta> ricercaPerAste(String ricerca)
 }
 public List<Utente> ricercaPerUtenti(String ricerca)
 {
+	System.out.println("ecco  "+ ricerca);
 	List<Utente> utentiRic= new ArrayList<>();
-	System.out.println("size "+aste.size());
-	for(Utente u : utenti)
+	System.out.println("size "+utenti.size());
+	for(Utente u : DbMock.getUtenti())
 	{
-		
 		if(u.getNomeProfilo().contains(ricerca))
 		{
 			utentiRic.add(u);

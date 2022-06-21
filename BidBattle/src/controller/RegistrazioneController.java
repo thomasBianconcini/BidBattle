@@ -13,8 +13,7 @@ public class RegistrazioneController {
 	private List<Utente> utenti= new ArrayList<>();
 	public RegistrazioneController()
 	{
-		db =new DbMock();
-		utenti = db.getUtenti();
+		
 	}
 	
 	public String Registrazione(String email, String password, String conferma ,String indirizzo )
@@ -23,16 +22,21 @@ public class RegistrazioneController {
 		if(password.equals(conferma) && email.contains("@") && password.length()>=8 && password.length()<40 && textPattern.matcher(password).matches())
 		{
 			Utente u = new Utente(email, password, indirizzo);
+			u.setNomeProfilo("");
+			u.setDescrizione("");
+			u.setImmagineProfilo("");
+			
+			utenti= DbMock.getUtenti();
 			utenti.add(u);
 			DbMock.setUtenti(utenti);
-			DbMock.setCurrentUser(u);
+			DbMock.setCurrent(u);
 			return "OK";
 		}else if(!password.equals(conferma))
 		{
 			return "Le password non coincidono";
 		}else if(!email.contains("@"))
 		{
-			return " Email non è un email";
+			return " Email non conforme";
 		}else if(password.length()<8)
 		{
 			return " Password troppo corta";

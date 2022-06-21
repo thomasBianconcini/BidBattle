@@ -105,7 +105,7 @@ private Shell walletShell;
 			}
 		});
 		btnOffri.setBounds(34, 274, 49, 25);
-		btnOffri.setText("Ricarica");
+		btnOffri.setText("Prelievo");
 		
 		text_1 = new Text(shell, SWT.BORDER);
 		text_1.setBounds(34, 117, 216, 21);

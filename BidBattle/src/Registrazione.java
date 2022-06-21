@@ -65,25 +65,27 @@ public class Registrazione  {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		shell.setSize(758, 576);
-		shell.setText("SWT Application");
+		shell.setSize(729, 469);
+		shell.setText("Registrazione");
 		shell.setLayout(null);
 		
 		Label lblRegistrazione = new Label(shell, SWT.NONE);
 		lblRegistrazione.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblRegistrazione.setBounds(274, 23, 117, 28);
+		lblRegistrazione.setBounds(253, 23, 162, 37);
 		lblRegistrazione.setForeground(SWTResourceManager.getColor(255, 127, 80));
-		lblRegistrazione.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
+		lblRegistrazione.setFont(SWTResourceManager.getFont("Segoe UI", 17, SWT.BOLD));
 		lblRegistrazione.setText("Registrazione");
 		
 		Label lblEmail = new Label(shell, SWT.NONE);
+		lblEmail.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblEmail.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblEmail.setBounds(120, 60, 32, 15);
 		lblEmail.setText("Email:");
 		
 		Label lblPassword = new Label(shell, SWT.NONE);
+		lblPassword.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblPassword.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblPassword.setBounds(120, 120, 53, 15);
+		lblPassword.setBounds(120, 120, 153, 15);
 		lblPassword.setText("Password:");
 		
 		Label lblminimoCaratteri = new Label(shell, SWT.NONE);
@@ -93,16 +95,18 @@ public class Registrazione  {
 		lblminimoCaratteri.setText("(Minimo 8 caratteri, almeno una lettera maiuscola)");
 		
 		Label lblConfermaPassword = new Label(shell, SWT.NONE);
+		lblConfermaPassword.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblConfermaPassword.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblConfermaPassword.setBounds(120, 190, 109, 15);
+		lblConfermaPassword.setBounds(120, 190, 153, 15);
 		lblConfermaPassword.setText("Conferma Password:");
 		
 		text_2 = new Text(shell, SWT.BORDER | SWT.PASSWORD);
 		text_2.setBounds(120, 220, 439, 21);
 		
 		Label lblIndirizzo = new Label(shell, SWT.NONE);
+		lblIndirizzo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblIndirizzo.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblIndirizzo.setBounds(120, 250, 47, 15);
+		lblIndirizzo.setBounds(120, 250, 93, 15);
 		lblIndirizzo.setText("Indirizzo:");
 		
 		text_3 = new Text(shell, SWT.BORDER);
@@ -110,7 +114,7 @@ public class Registrazione  {
 		
 		Label lblNewLabel = new Label(shell, SWT.NONE);
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel.setBounds(120, 369, 439, 37);
+		lblNewLabel.setBounds(199, 315, 383, 37);
 		
 		Button btnRegistrati = new Button(shell, SWT.NONE);
 		btnRegistrati.addMouseListener(new MouseAdapter() {

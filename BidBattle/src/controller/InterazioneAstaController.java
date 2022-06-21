@@ -28,12 +28,15 @@ public InterazioneAstaController() {};
 				 {
 					 elimina=a;
 					 res= new Offerta(importo,email,asta);
+					 if(a.getOfferteInCorso().size()!=0)
+					 {
 					 String emailDaRimborsare= a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getUtente();
 					 System.out.println(emailDaRimborsare);
 					 Utente u= DbMock.getUtente(emailDaRimborsare);
 					 System.out.println(u.getWallet().getSaldo());
 					 u.getWallet().setSaldo(u.getWallet().getSaldo()+a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getPrezzo());
 					 System.out.println(u.getWallet().getSaldo());
+					 }
 					 a.inserisci(res);
 				 }
 				 else

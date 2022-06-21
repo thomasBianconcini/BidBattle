@@ -38,7 +38,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import java.util.function.Consumer;
 
-public class PaginaPrincipalenon {
+public class test2 {
 
 	protected Shell shell;
 	private Text txtRicercaPerUtente;
@@ -59,14 +59,13 @@ public class PaginaPrincipalenon {
 	private boolean ricerca=false;
 	List<VediAsta> current=  new ArrayList<VediAsta>();
 	private int count =0;
-	private Label text;
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
-			PaginaPrincipalenon window = new PaginaPrincipalenon();
+			test2 window = new test2();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +93,6 @@ public class PaginaPrincipalenon {
 		shell = new Shell(display);
 		shell.setSize(1920, 1080);
 		List<Asta> aste= DbMock.getAsteDaMostare();
-		DbMock.setCurrent(null);
 		shell.setFullScreen(true);
 		shell.setText("PaginaPrincipaleNonAutenticata");
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -132,12 +130,12 @@ public class PaginaPrincipalenon {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				PaginaPrincipalenon pp= new PaginaPrincipalenon();
+				test2 pp= new test2();
 				shell.close();
 				pp.open();
 			}
 		});
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel.setBounds(153, 480, 78, 37);
 		lblNewLabel.setText("Home");
@@ -151,7 +149,7 @@ public class PaginaPrincipalenon {
 				l.open();
 			}
 		});
-		lblNewLabel_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
+		lblNewLabel_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1.setText("Login");
 		lblNewLabel_1.setBounds(153, 710, 78, 37);
@@ -165,10 +163,10 @@ public class PaginaPrincipalenon {
 				registrazione.open();
 			}
 		});
-		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
+		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
 		lblNewLabel_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1.setText("Registrazione");
-		lblNewLabel_1_1.setBounds(108, 940, 183, 37);
+		lblNewLabel_1_1.setBounds(108, 940, 167, 37);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setBounds(0, 0, 382, 382);
@@ -257,7 +255,6 @@ public class PaginaPrincipalenon {
 		
 		
 		Combo combo = new Combo(shell, SWT.NONE);
-		combo.setItems(new String[] {"Sport", "Motori", "Arredo", "Abbigliamento", "Tecnologia"});
 		combo.setBounds(1480, 160, 104, 23);
 		combo.setText("Categoria");
 		
@@ -270,7 +267,7 @@ public class PaginaPrincipalenon {
 				{
 					if(txtRicercaPerEmail.getText().equals(""))
 					{
-						PaginaPrincipalenon pp= new PaginaPrincipalenon();
+						test2 pp= new test2();
 						shell.close();
 						pp.open();
 					}else
@@ -281,14 +278,13 @@ public class PaginaPrincipalenon {
 						ricA= nonContr.ricercaPerAste(txtRicercaPerEmail.getText());
 						pagina =1;
 						count=ricA.size();
-						PaginaPrincipalenon pp= new PaginaPrincipalenon();
+						test2 pp= new test2();
 						pp.setRicA(ricA);
 						pp.setStoRicercando(true);
 						shell.close();
 						pp.open();
 						}else
 						{
-						
 							ricU =nonContr.ricercaPerUtenti(txtRicercaPerEmail.getText());
 							pagina =1;
 							mostraUtente(ricU,pagina);
@@ -299,14 +295,31 @@ public class PaginaPrincipalenon {
 		
 		});
 		txtRicercaPerEmail.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
-		txtRicercaPerEmail.setBounds(480, 159, 895, 23);
-		
-		text = new Label(shell, SWT.READ_ONLY);
-		text.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		text.setText(" Ricerca Asta (default) o Utente (NomeUtente)");
-		text.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
-		text.setBounds(480, 125, 895, 23);
+		txtRicercaPerEmail.setText(" Ricerca Asta (default) o Utente (NomeUtente)");
+		txtRicercaPerEmail.setBounds(480, 154, 895, 23);
 		pag.add(pagina);
+		/*Thread timeThread = new Thread() {
+            public void run() {
+                while (true) {
+                    display.syncExec(new Runnable() {
+
+                        @Override
+                        public void run() {
+                        	lblNewLabel_2.setText(Calendar.getInstance().getTime().toString());
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        timeThread.setDaemon(true);
+        timeThread.start();*/
 	}
 	public void mostra(List<Asta> aste,int pp,Group g, Label l1 , Button b1, Label l2, Composite c)
 	{
@@ -317,19 +330,15 @@ public class PaginaPrincipalenon {
 		
 			if((pp-1)*4+i<aste.size())
 			{
-				if(((pagina-1)*4+i)==aste.size()-1)
-				{
-					check=false;
-				}
 				Asta a=aste.get((pp-1)*4+i);
 				Label lblAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
-				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18,  SWT.BOLD));
+				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.NORMAL));
 				lblAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-				lblAsta.setBounds(30, 83+i*200, 500, 40);
+				lblAsta.setBounds(30, 83+i*200, 166, 32);
 				lblAsta.setText(a.getTitoloAsta());
 				titoli.add(lblAsta);
 				Button btnNewButton = new Button(g, SWT.PUSH);
-				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 8, SWT.NORMAL));
+				btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
 				btnNewButton.setBounds(743, 83+i*200, 80, 32);
 				bottoni.add(btnNewButton);
 				btnNewButton.setText("Visualizza");
@@ -355,14 +364,12 @@ public class PaginaPrincipalenon {
 				Label lblTitoloAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblTitoloAsta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 				lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-				lblTitoloAsta.setBounds(30, 138+i*200, 750, 65);
+				lblTitoloAsta.setBounds(30, 138+i*200, 599, 30);
 				descrizioni.add(lblTitoloAsta);
-				lblTitoloAsta.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria());
+				lblTitoloAsta.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
 				
 				Composite composite = new Composite(g, SWT.NONE);
 				composite.setBounds(875, 83+i*200, 150, 150);
-				if(!a.getProdotto().getImmagine().equals(""))
-				composite.setBackgroundImage(new Image(display,a.getProdotto().getImmagine()));
 				quadrati.add(composite);
 			
 			}
@@ -398,12 +405,10 @@ public class PaginaPrincipalenon {
 					Asta a= aste.get((pagina-1)*4+i);
 					va.setNomeAsta(a.getTitoloAsta());
 					l1.setText(a.getTitoloAsta());
-					l2.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria());
+					l2.setText("Descrizione " +a.getDescrizioneAsta()+", Categoria :" +a.getProdotto().getCategoria());
 					b.setVisible(true);
 					c.setVisible(true);
 					b.setText("Visualizza");
-					if(!a.getProdotto().getImmagine().equals(""))
-					c.setBackgroundImage(new Image(display,a.getProdotto().getImmagine()));
 					if(!creami || ricerca)
 					{
 					b.addMouseListener(ma= new MouseAdapter() {
@@ -452,8 +457,6 @@ public class PaginaPrincipalenon {
 				b.setVisible(true);
 				c.setVisible(true);
 				b.setText("Visualizza");
-				if(!a.getImmagineProfilo().equals(""))
-				c.setBackgroundImage(new Image(display,a.getImmagineProfilo()));
 				if(((pagina-1)*4+i)==utenti.size()-1)
 				{
 					check=false;
