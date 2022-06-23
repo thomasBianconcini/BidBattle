@@ -108,14 +108,14 @@ public class Utente {
 	public List<Asta> getInterazione()
 	{
 		List<Asta> res= new ArrayList<Asta>();
-		System.out.println(offerteInCorso.size());
 		for(Offerta o : offerteInCorso)
 		{
 			Asta a= o.getAsta();
 			res.add(a);
 		}
 		for(Asta asta: asteVinte)
-		{
+		{	
+			if(!res.contains(asta))
 			res.add(asta);
 		}
 		return res;

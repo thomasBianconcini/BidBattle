@@ -1,4 +1,5 @@
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Text;
@@ -32,6 +33,7 @@ public class Modificadati {
 	private Text text_1;
 	private Text text_5;
 	protected Shell shellProfilo;
+	private String immPath="nero.jpg";
 	/**
 	 * Launch the application.
 	 * @param args
@@ -146,6 +148,13 @@ public class Modificadati {
 		lblImmagine_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		
 		Group group = new Group(shell, SWT.NONE);
+		group.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				FileDialog file= new FileDialog(shell);
+				 immPath =file.open();
+			}
+		});
 		group.setBounds(120, 451, 109, 109);
 		
 		Button btnNewButton_1 = new Button(shell, SWT.NONE);
@@ -158,7 +167,6 @@ public class Modificadati {
 					list.add("tt");
 				else
 				{
-					
 					list.add(text.getText());
 				}
 				if(text_4.getText().isEmpty())
@@ -184,6 +192,7 @@ public class Modificadati {
 					list.add("tt");
 				else
 					list.add(text_5.getText());
+					list.add(immPath);
 				boolean check= mc.modificaDati(list);
 				if(check)
 				{

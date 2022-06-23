@@ -1,18 +1,25 @@
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import model.Asta;
 import model.DbMock;
+import model.Utente;
 
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Combo;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import javax.swing.JFileChooser;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.dnd.DropTarget;
@@ -26,11 +33,14 @@ import org.eclipse.swt.graphics.Image;
 public class VediAsta {
 
 	protected Shell shell;
+	private Shell chiSono;
 	private String nomeAsta;
 	DbMock db= new DbMock();
 	private boolean inHome= true;
 	private boolean offri= true;
 	Display display = Display.getDefault();
+	private Boolean thread = true;
+	Thread timeThread;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -48,10 +58,14 @@ public class VediAsta {
 	 * Open the window.
 	 */
 	public void open() {
-		
 		createContents();
 		shell.open();
 		shell.layout();
+		shell.addListener(SWT.Close, new Listener() {
+		      public void handleEvent(Event event) {
+		        thread = false;
+		      }
+		    });
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -66,7 +80,7 @@ public class VediAsta {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		shell.setSize(670, 688);
-		shell.setText("SWT Application");
+		shell.setText("Asta");
 		shell.setLayout(null);
 		Asta a= DbMock.getAstabyTitolo(this.getNomeAsta());
 		Group grpProdotto = new Group(shell, SWT.SHADOW_ETCHED_IN);
@@ -137,6 +151,7 @@ public class VediAsta {
 			public void mouseUp(MouseEvent e) {
 				FaiOfferta off= new FaiOfferta();
 				off.setInHome(inHome);
+				off.setChiSono(chiSono);
 				off.setNomeAsta(a.getTitoloAsta());
 				off.setP(shell);
 				off.open();
@@ -145,8 +160,6 @@ public class VediAsta {
 		btnCreaAsta.setBounds(83, 535, 75, 25);
 		btnCreaAsta.setText("Offri");
 		
-
-		System.out.print("Vedi asta "+ offri  + " tttt " + a.getTitoloAsta()); 
 		
 		if(!offri)
 			btnCreaAsta.setVisible(false);
@@ -176,9 +189,57 @@ public class VediAsta {
 		Label lblNewLabel_8 = new Label(shell, SWT.NONE);
 		lblNewLabel_8.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_8.setBounds(83, 495, 329, 15);
-		lblNewLabel_8.setText("Data "+a.getDurataAsta().getDayOfMonth()+ "/"+(a.getDurataAsta().getMonthValue()+1)+"/" +a.getDurataAsta().getYear()+ "  Orario: "+ a.getDurataAsta().getHour()+":"+a.getDurataAsta().getMinute());
+		thread=true;
+		 timeThread = new Thread() {
+	        public void run() {
+	            while (thread) {
+	                display.syncExec(new Runnable() {
 
+	                    @Override
+	                    public void run() {
+	                    	//private String tempo= a.getDurataAsta().minus(LocalDateTime.now());
+	            
+	                    	Duration d = Duration.between(a.getDurataAsta(), LocalDateTime.now());
+	                    	int oreFine = d.toHoursPart();
+	                    	long GiorniFine = d.toDaysPart();
+	                    	int minutiFine = d.toMinutesPart();
+	                    	int secondFine = d.toSecondsPart();
+	                    	//lblTitoloAsta.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria()+"\n"+"Termina tra: "+d);
+	                    	if(thread)
+	                    		lblNewLabel_8.setText("Termina tra: "+Math.abs(GiorniFine)+"gg"+" "+ Math.abs(oreFine) +":"+Math.abs(minutiFine)+":"+Math.abs(secondFine));
+	                    
+	                    	if((Math.abs(GiorniFine)==0 && Math.abs(minutiFine)<=0 && Math.abs(secondFine)<=0) || LocalDateTime.now().isAfter(a.getDurataAsta()))
+	                    	{
+	                    		DbMock.getAsteDaMostare().remove(a);
+	                    		lblNewLabel_8.setText("Asta terminata");
+	                    		btnCreaAsta.setVisible(false);
+	                    		DbMock.getAsteTerminate().add(a);
+	                    	
+	                    		//DbMock.getAs
+	                    		DbMock.getUtente(a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getUtente()).getAsteVinte().add(a);
+	                    		thread=false;
+	                    	}
+	                    	//lblTitoloAsta.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria()+"\n"+Calendar.getInstance().getTime().toString());
+	                    }
+	                });
+
+	                try {
+	                    Thread.sleep(1000);
+	                } catch (InterruptedException e) {
+	                	 timeThread.stop();
+	    	        }
+	                
+	            }
+	            timeThread.stop();
+	        }
+	    };
+
+	    timeThread.setDaemon(true);
+	    timeThread.start();
+	    
 	}
+	    
+
 
 	public boolean isInHome() {
 		return inHome;
@@ -202,6 +263,14 @@ public class VediAsta {
 
 	public void setOffri(boolean offri) {
 		this.offri = offri;
+	}
+
+	public Shell getChiSono() {
+		return chiSono;
+	}
+
+	public void setChiSono(Shell chiSono) {
+		this.chiSono = chiSono;
 	}
 	
 }

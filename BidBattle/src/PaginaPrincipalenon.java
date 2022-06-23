@@ -20,6 +20,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.ExpandBar;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -308,6 +310,28 @@ public class PaginaPrincipalenon {
 		text.setBounds(480, 125, 895, 23);
 		pag.add(pagina);
 	}
+	/*Thread timeThread = new Thread() {
+        public void run() {
+            while (true) {
+                display.syncExec(new Runnable() {
+
+                    @Override
+                    public void run() {
+                    	lblNewLabel_2.setText(Calendar.getInstance().getTime().toString());
+                    }
+                });
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    timeThread.setDaemon(true);
+    timeThread.start();*/
 	public void mostra(List<Asta> aste,int pp,Group g, Label l1 , Button b1, Label l2, Composite c)
 	{
 		g.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -355,7 +379,7 @@ public class PaginaPrincipalenon {
 				Label lblTitoloAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblTitoloAsta.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 				lblTitoloAsta.setBackground(SWTResourceManager.getColor(255, 215, 0));
-				lblTitoloAsta.setBounds(30, 138+i*200, 750, 65);
+				lblTitoloAsta.setBounds(30, 138+i*200, 750, 100);
 				descrizioni.add(lblTitoloAsta);
 				lblTitoloAsta.setText("Descrizione: " +a.getDescrizioneAsta()+"\nCategoria: " +a.getProdotto().getCategoria());
 				
@@ -449,7 +473,7 @@ public class PaginaPrincipalenon {
 				Utente a= utenti.get((pagina-1)*4+i);
 				l1.setText(a.getNomeProfilo());
 				l2.setText(a.getDescrizione());
-				b.setVisible(true);
+				b.setVisible(false);
 				c.setVisible(true);
 				b.setText("Visualizza");
 				if(!a.getImmagineProfilo().equals(""))

@@ -1,4 +1,5 @@
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
@@ -38,6 +39,7 @@ public class CreaAsta {
 	private Text text_3;
 	private Text text_4;
 	private Text text_5;
+	String immPath= "nero.jpg";
 private Shell shellGestioneAsta;
 	/**
 	 * Launch the application.
@@ -143,10 +145,15 @@ private Shell shellGestioneAsta;
 		lblImmagine.setText("Immagine:");
 		
 		Group group = new Group(grpProdotto, SWT.NONE);
+		group.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				FileDialog file= new FileDialog(shell);
+				 immPath =file.open();
+			}
+		});
 		group.setBackground(SWTResourceManager.getColor(240, 255, 255));
-		group.setBounds(230, 64, 241, 181);
-		
-		DropTarget dropTarget = new DropTarget(group, DND.DROP_MOVE);
+		group.setBounds(240, 64, 241, 181);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -189,18 +196,10 @@ private Shell shellGestioneAsta;
 				StringTokenizer st = new StringTokenizer(ora_minuti,": /");
 				int ora= Integer.parseInt(st.nextToken());
 				int minuti =Integer.parseInt(st.nextToken());
-				LocalDateTime  fineAsta= LocalDateTime.of(dateTime.getYear(),dateTime.getMonth(),dateTime.getDay(),ora,minuti);
+				LocalDateTime  fineAsta= LocalDateTime.of(dateTime.getYear(),dateTime.getMonth()+1,dateTime.getDay(),ora,minuti);
 				GestioneAstaController gac= new GestioneAstaController();
-				String img="nero.jpg";
-				if(false)
-				{
-					// input dell'immgine
-				}else
-				{
-					img="nero.jpg";
-				}
 				
-				Prodotto p = new Prodotto(titoloProdotto, descrizioneProdotto, categoria,img );
+				Prodotto p = new Prodotto(titoloProdotto, descrizioneProdotto, categoria,immPath );
 				String [] toCreate= new String[]{
 						titoloAsta,descrizioneAsta,DbMock.getCurrentUser().getEmail()
 				};

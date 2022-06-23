@@ -98,6 +98,7 @@ private Shell walletShell;
 					GestioneWalletController gc = new  GestioneWalletController();
 					gc.prelievo(Double.parseDouble(text_4.getText()), combo.getText());
 					Wallet w = new Wallet();
+					walletShell.close();
 					shell.close();
 					w.open();
 				}

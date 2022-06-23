@@ -14,6 +14,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.widgets.Combo;
 
 public class Ricarica {
 
@@ -106,7 +107,9 @@ private Shell shellWallet;
 		lblImport.setText("Importo:");
 		lblImport.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblImport.setBounds(34, 264, 68, 15);
-		
+		Combo combo = new Combo(shell, SWT.NONE);
+		combo.setItems(new String[] {"Euro", "Dollaro", "Pound"});
+		combo.setBounds(114, 294, 68, 23);
 		text_4 = new Text(shell, SWT.BORDER);
 		text_4.setBounds(34, 294, 49, 21);
 		Button btnOffri = new Button(shell, SWT.NONE);
@@ -116,8 +119,9 @@ private Shell shellWallet;
 				if(!text_1.getText().isEmpty() && !text_2.getText().isEmpty() && !text_3.getText().isEmpty()&& !text.getText().isEmpty())
 				{
 					GestioneWalletController gc = new  GestioneWalletController();
-					gc.ricarica(Double.parseDouble(text_4.getText()), "euro");
+					gc.ricarica(Double.parseDouble(text_4.getText()), combo.getText());
 					Wallet w = new Wallet();
+					shellWallet.close();
 					shell.close();
 					w.open();
 				}
@@ -125,8 +129,13 @@ private Shell shellWallet;
 			}
 		});
 
-		btnOffri.setBounds(133, 292, 49, 25);
+		btnOffri.setBounds(34, 344, 49, 25);
 		btnOffri.setText("Ricarica");
+		
+		Label lblValuta = new Label(shell, SWT.NONE);
+		lblValuta.setText("Valuta:");
+		lblValuta.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblValuta.setBounds(114, 264, 68, 15);
 	}
 
 	public Shell getShellWallet() {

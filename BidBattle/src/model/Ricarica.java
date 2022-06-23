@@ -4,7 +4,14 @@ import java.time.LocalDateTime;
 public class Ricarica {
 	@Override
 	public String toString() {
-		return "Movimento: Ricarica\nImporto= " + importo + " | Divisa= " + divisa + " | Data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();	}
+		String ch = "";
+		if(divisa.equalsIgnoreCase("dollaro"))
+			 ch = "$";
+		if(divisa.equalsIgnoreCase("euro"))
+			 ch = "€";
+		if(divisa.equalsIgnoreCase("pound"))
+			 ch = "£";
+		return  "Movimento: Ricarica\nImporto= " + importo + ch + " | Data= "+data.getDayOfMonth()+ "/"+(data.getMonthValue())+"/" +data.getYear()+ " "+ data.getHour()+":"+data.getMinute();	}
 
 	private int id;
 	private double importo;

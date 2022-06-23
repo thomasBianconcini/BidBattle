@@ -311,6 +311,7 @@ public class InterazioneAste {
 						{
 								VediAsta va= new VediAsta();
 								va.setInHome(false);
+								va.setChiSono(shell);
 								va.setNomeAsta(a.getTitoloAsta());
 								va.open();
 						}
@@ -410,6 +411,7 @@ public class InterazioneAste {
 						if(pp==pagina)
 						{
 						va.setInHome(false);
+						va.setChiSono(shell);
 						va.open();
 						}
 					}

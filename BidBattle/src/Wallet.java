@@ -115,7 +115,7 @@ public class Wallet {
 				h.open();
 			}
 		});
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel.setBounds(153, 438, 78, 37);
 		lblNewLabel.setText("Home");
@@ -129,10 +129,10 @@ public class Wallet {
 				ia.open();
 			}
 		});
-		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_1_1.setText("Interazione Asta");
-		lblNewLabel_1_1.setBounds(100, 994, 190, 37);
+		lblNewLabel_1_1.setBounds(100, 994, 217, 37);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setBounds(0, 0, 382, 382);
@@ -165,21 +165,21 @@ public class Wallet {
 			}
 		});
 		lblNewLabel_1_1_1.setText("Profilo");
-		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1.setBounds(153, 577, 78, 37);
+		lblNewLabel_1_1_1.setBounds(153, 577, 104, 37);
 		
 		Label lblNewLabel_1_1_1_1 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_1.setText("Wallet");
-		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_1.setBounds(153, 716, 78, 37);
+		lblNewLabel_1_1_1_1.setBounds(153, 716, 155, 37);
 		
 		Label lblNewLabel_1_1_1_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_1_1_1_2.setText("Gestione Asta");
-		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.NORMAL));
+		lblNewLabel_1_1_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel_1_1_1_2.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblNewLabel_1_1_1_2.setBounds(108, 855, 167, 37);
+		lblNewLabel_1_1_1_2.setBounds(108, 855, 182, 37);
 		lblNewLabel_1_1_1_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {

@@ -120,6 +120,14 @@ public class Home {
 		btnCheckButton.setBounds(1381, 159, 93, 23);
 		btnCheckButton.setText("Utente");
 		Label lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Home pp = new Home();
+				shell.close();
+				pp.open();
+			}
+		});
 		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel.setBounds(153, 438, 78, 37);
@@ -413,6 +421,7 @@ public class Home {
 							{
 								VediAsta va= new VediAsta();
 								va.setInHome(true);
+								va.setChiSono(shell);
 								if(a.getVenditore().equals(DbMock.getCurrentUser().getEmail()))
 									va.setOffri(false);
 								va.setNomeAsta(a.getTitoloAsta());
@@ -486,6 +495,7 @@ public class Home {
 							{
 								if(a.getVenditore().equals(DbMock.getCurrentUser().getEmail()))
 									va.setOffri(false);
+								va.setChiSono(shell);
 								va.open();
 							}
 						}
@@ -524,9 +534,10 @@ public class Home {
 					Utente a= utenti.get((pagina-1)*4+i);
 					l1.setText(a.getNomeProfilo());
 					l2.setText(a.getDescrizione());
-					b.setVisible(true);
+					b.setVisible(false);
 					c.setVisible(true);
 					b.setText("Visualizza");
+					
 					if(!a.getImmagineProfilo().equals(""))
 					c.setBackgroundImage(new Image(display,a.getImmagineProfilo()));
 					if(((pagina-1)*4+i)==utenti.size()-1)

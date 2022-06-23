@@ -44,7 +44,8 @@ public InterazioneAstaController() {};
 					 // pop up per annullo
 					 return null;
 				 }
-				 if(Duration.between(a.getDurataAsta(), LocalDateTime.now()).getSeconds()<30)
+				 Duration d=  Duration.between(a.getDurataAsta(), LocalDateTime.now());
+				 if(d.getSeconds()<30 && d.toDaysPart()==0 && d.toMinutesPart()==0)
 				 {
 					 a.setDurataAsta(LocalDateTime.now().plusSeconds(60));
 				 } 
@@ -53,10 +54,27 @@ public InterazioneAstaController() {};
 		 }
 		 aste.remove(elimina);
 		 aste.add(inserisci);
-		 asteUtente.remove(elimina);
-		 asteUtente.add(inserisci);
+		 DbMock.getAsteFromVenditore(asta.getVenditore()).remove(elimina);
+		 DbMock.getAsteFromVenditore(asta.getVenditore()).add(inserisci);
 		 DbMock.getCurrentUser().getWallet().setSaldo( DbMock.getCurrentUser().getWallet().getSaldo()-importo);
+		 List<Offerta> list = DbMock.getUtente(email).getOfferteInCorso();
+		 Offerta daEliminare=null;
+		 for(Offerta o : list)
+		 {
+			 if(o.getAsta().getTitoloAsta().equals(asta.getTitoloAsta()))
+			 {
+				 daEliminare=o;
+			 }
+		 }
+		 if(daEliminare!=null)
+		 {
+			 System.out.println( DbMock.getUtente(email).getOfferteInCorso().size());
+			 DbMock.getUtente(email).getOfferteInCorso().remove(daEliminare);
+			 System.out.println( DbMock.getUtente(email).getOfferteInCorso().size());
+		 }
+		 
 		 DbMock.getUtente(email).getOfferteInCorso().add(res);
+		
 		 return res;
 	}
 	 public void add(Asta a)

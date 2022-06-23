@@ -31,13 +31,15 @@ public class ModificaDatiController {
         }
         if(!dati.get(4).equals("tt"))
         {
-        	System.out.println("ciao mare");
             utenteToModify.setNomeProfilo(dati.get(4));
         }
         if(!dati.get(5).equals("tt"))
         {
-        	System.out.println("ciao mare");
             utenteToModify.setDescrizione(dati.get(5));
+        }
+        if(!dati.get(6).equals("tt"))
+        {
+            utenteToModify.setImmagineProfilo(dati.get(6));
         }
         DbMock.setCurrentUser(utenteToModify);
         return res;

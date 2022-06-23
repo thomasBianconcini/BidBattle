@@ -23,6 +23,8 @@ public class FaiOfferta {
 	private String nomeAsta;
 	DbMock db = new DbMock();
 	Shell p;
+	private Boolean va;
+	Shell chiSono;
 	private boolean inHome = true;
 	public String getNomeAsta() {
 		return nomeAsta;
@@ -116,13 +118,17 @@ public class FaiOfferta {
 					if(inHome)
 					{
 					Home h = new Home();
+					va=false;
+					
 					p.close();
+					chiSono.close();
 					shell.close();
 					h.open();
 					}else
 					{
 						InterazioneAste ia = new InterazioneAste();
 						p.close();
+						chiSono.close();
 						shell.close();
 						ia.open();
 					}
@@ -150,6 +156,22 @@ public class FaiOfferta {
 
 	public void setInHome(boolean inHome) {
 		this.inHome = inHome;
+	}
+
+	public Boolean getVa() {
+		return va;
+	}
+
+	public void setVa(Boolean va) {
+		this.va = va;
+	}
+
+	public Shell getChiSono() {
+		return chiSono;
+	}
+
+	public void setChiSono(Shell chiSono) {
+		this.chiSono = chiSono;
 	}
 	
 }
