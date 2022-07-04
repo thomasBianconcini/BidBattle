@@ -291,6 +291,10 @@ public class InterazioneAste {
 			
 			if((pp-1)*4+i<aste.size())
 			{
+				if(((pagina-1)*4+i)==aste.size()-1)
+				{
+					check=false;
+				}
 				Asta a=aste.get((pp-1)*4+i);
 				Label lblAsta = new Label(g, SWT.H_SCROLL | SWT.V_SCROLL);
 				lblAsta.setFont(SWTResourceManager.getFont("Segoe UI", 18, SWT.BOLD));

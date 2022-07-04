@@ -22,7 +22,7 @@ public List<Asta> ricercaPerAste(String ricerca)
 	for(Asta a : aste)
 	{
 		
-		if(a.getTitoloAsta().contains(ricerca))
+		if(a.getTitoloAsta().toLowerCase().contains(ricerca.toLowerCase()))
 		{
 			
 			asteRic.add(a);
@@ -38,7 +38,7 @@ public List<Utente> ricercaPerUtenti(String ricerca)
 	System.out.println("size "+utenti.size());
 	for(Utente u : DbMock.getUtenti())
 	{
-		if(u.getNomeProfilo().contains(ricerca))
+		if(u.getNomeProfilo().toLowerCase().contains(ricerca.toLowerCase()))
 		{
 			utentiRic.add(u);
 		}

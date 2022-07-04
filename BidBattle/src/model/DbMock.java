@@ -17,13 +17,28 @@ public class DbMock {
 		if(!init)
 		{
 			init = true;
-			Utente test= new Utente("rick@gmail.com","r","Viale terme 45");
-			test.setDescrizione("Sono l'admin e il tester del sistema");
-			test.setNomeProfilo("Tester");
+			Utente test= new Utente("rick@gmail.com","Password","Viale terme 45");
+			test.setDescrizione("Amante dei quadri e dell'arte, sono alla ricerca di oggetti che raccontano una storia");
+			test.setNomeProfilo("Rick 77");
 			test.setImmagineProfilo("admin.jpg");
 			utenti.add(test);
 		    DbMock.setCurrent(test);
-			for(int i = 0; i<3 ;i++)
+		   
+		    Prodotto q = new Prodotto("Vinile AC/DC ", "Many Faces of AC/DC ", "Musica" ,"acdc.jpg");
+			Asta qq  = new Asta("Disco storico AC/DC", "Many Faces of AC/DC", LocalDateTime.now().minusDays(1), q, "mike@gmail.com",1.00);
+			Offerta qqq = new Offerta(50,"rick@gmail.com", qq);
+			qq.inserisci(qqq);
+			test.getAsteVinte().add(qq);
+			asteTerminate.add(qq);
+			
+			Prodotto w = new Prodotto("Jordan 1", "Jordan 1 High", "Sport" ,"jj.jpg");
+			Asta ww  = new Asta("Scarpa Jordan", "Jordan1 high", LocalDateTime.now().minusDays(1), w, "mike@gmail.com",1.00);
+			Offerta www = new Offerta(50,"rick@gmail.com", ww);
+			ww.inserisci(www);
+			test.getAsteVinte().add(ww);
+			asteTerminate.add(ww);
+		    
+			/*for(int i = 0; i<3 ;i++)
 			{
 					Prodotto p1 = new Prodotto("vinta"+i, "descrizione"+i, "Sport" ,"logo.jpg");
 					Asta a1  = new Asta("vinta"+i, "descrizione"+i, LocalDateTime.now().minusDays(1), p1, "u"+i+"@"+"gmail.com",1.00);
@@ -31,82 +46,75 @@ public class DbMock {
 					a1.inserisci(of);
 					test.getAsteVinte().add(a1);
 					asteTerminate.add(a1);
-			}
+			}*/
 			Utente u1= new Utente("mark@gmail.com", "Password", "via mark 1");
-			u1.setDescrizione("tecnico ");
-			u1.setNomeProfilo("mark" );
+			u1.setDescrizione("Giocatore di scacchi professionista");
+			u1.setNomeProfilo("Mark chess" );
 			u1.setImmagineProfilo("p5.jpg");
 			utenti.add(u1);
 			
 			Utente u2= new Utente("mike@gmail.com", "Password", "via mike 1");
-			u2.setDescrizione("tecnico ");
-			u2.setNomeProfilo("mike" );
+			u2.setDescrizione("Tecnico laureato in Telecomunicazioni ");
+			u2.setNomeProfilo("Ingegner Mike" );
 			u2.setImmagineProfilo("p6.jpg");
 			utenti.add(u2);
 			
 			Utente u3= new Utente("luke@gmail.com", "Password", "via luke 1");
-			u3.setDescrizione("tecnico ");
-			u3.setNomeProfilo("luke" );
+			u3.setDescrizione("Appassionato di videogiochi");
+			u3.setNomeProfilo("Luke 93" );
 			u3.setImmagineProfilo("p7.jpg");
 			utenti.add(u3);
 			
 			Utente u4= new Utente("fre@gmail.com", "Password", "via fre 1");
-			u4.setDescrizione("tecnico ");
-			u4.setNomeProfilo("fre" );
+			u4.setDescrizione("MakeUp Artist");
+			u4.setNomeProfilo("Fre88" );
 			u4.setImmagineProfilo("p4.jpg");
 			utenti.add(u4);
 			
-			Utente u5= new Utente("linda@gmail.com", "Password", "via linda 1");
-			u5.setDescrizione("tecnico ");
-			u5.setNomeProfilo("linda" );
+			Utente u5= new Utente("linda@gmail.com", "Password", "Via Friuli 7");
+			u5.setDescrizione("Collezionatrice seriale di cimeli");
+			u5.setNomeProfilo("Linda" );
 			u5.setImmagineProfilo("p1.jpg");
 			utenti.add(u5);
 			
 			Utente u6= new Utente("marika@gmail.com", "Password", "via marika 1");
-			u6.setDescrizione("tecnico ");
-			u6.setNomeProfilo("marika" );
+			u6.setDescrizione("46 yo, NY");
+			u6.setNomeProfilo("_Marika_" );
 			u6.setImmagineProfilo("p2.jpg");
 			utenti.add(u6);
 			
 			Utente u7= new Utente("pol@gmail.com", "Password", "via pol 1");
-			u7.setDescrizione("tecnico ");
-			u7.setNomeProfilo("pol");
+			u7.setDescrizione("Modellismo 4ever");
+			u7.setNomeProfilo("Pol");
 			u7.setImmagineProfilo("p8.jpg");
 			utenti.add(u7);
 			
 			Utente u8= new Utente("renzo@gmail.com", "Password", "via renzo 1");
-			u8.setDescrizione("tecnico ");
-			u8.setNomeProfilo("renzo" );
-			u8.setImmagineProfilo("p8.jpg");
+			u8.setDescrizione(" ");
+			u8.setNomeProfilo("x_Renzo_x" );
+			u8.setImmagineProfilo("p9.jpg");
 			utenti.add(u8);
 			
 			Utente u9= new Utente("hu@gmail.com", "Password", "via hu 1");
-			u9.setDescrizione("tecnico ");
+			u9.setDescrizione("China, esperta di massaggi");
 			u9.setNomeProfilo("hu" );
 			u9.setImmagineProfilo("p10.jpg");
 			utenti.add(u9);
 			
 			Utente u10= new Utente("lia@gmail.com", "Password", "via lia 1");
-			u10.setDescrizione("tecnico ");
-			u10.setNomeProfilo("lia" );
+			u10.setDescrizione("Alla ricerca del sacro Graal!! <3");
+			u10.setNomeProfilo("Lia" );
 			u10.setImmagineProfilo("p3.jpg");
 			utenti.add(u10);
 			
-			Prodotto p1 = new Prodotto("Computer", "nuovo computer", "Tecnologia" ,"pc.jpg");
+			Prodotto p1 = new Prodotto("Computer", "Computer lenovo", "Tecnologia" ,"pc.jpg");
 			Asta a1  = new Asta("Computer nuovissimo ", "computer 2022 nuova generazione", LocalDateTime.now().plusMinutes(1), p1, "mark@gmail.com",1.00);
 			Offerta of = new Offerta(100,"rick@gmail.com", a1);
 			a1.inserisci(of);
 			asteDaMostare.add(a1);
 			
-			Prodotto p12 = new Prodotto("Piscinhfnhnhna idromassaggio", "Janhnnhhcuzzi", "Sport" ,"piscina.jpg");
-			Asta a12  = new Asta("Jacuzzi nhnxhnhuova", "Jacuzzi nunhnhnova per relax 2 mt di diametro", LocalDateTime.now().plusSeconds(20), p12, "fre@gmail.com",1.00);
-			Offerta of222243 = new Offerta(19, "linda@gmail.com", a12);
-			a12.inserisci(of222243);
-			u5.getOfferteInCorso().add(of222243);
-			asteDaMostare.add(a12);
-			
-			Prodotto p2 = new Prodotto("Racchetta", "racchetta Babolat", "Sport" ,"racchetta.jpg");
-			Asta a2  = new Asta("Racchetta di Federer ", "racchetta usata da federer", LocalDateTime.now().plusDays(2).plusMonths(3), p2, "rick@gmail.com",1.00);
+			Prodotto p2 = new Prodotto("Racchetta", "Racchetta Babolat", "Sport" ,"racchetta.jpg");
+			Asta a2  = new Asta("Racchetta di Federer ", "Racchetta Babolat usata da federer", LocalDateTime.now().plusDays(2).plusMonths(3), p2, "rick@gmail.com",1.00);
 			Offerta of21 = new Offerta(19, "linda@gmail.com", a2);
 			a2.inserisci(of21);
 			u5.getOfferteInCorso().add(of21);
@@ -129,7 +137,7 @@ public class DbMock {
 			asteDaMostare.add(a4);
 			test.add(a4);
 			
-			Prodotto p5 = new Prodotto("Manubrio palestra", "5kg di manubrio", "Motori" ,"peso.jpg");
+			Prodotto p5 = new Prodotto("Manubrio palestra", "5kg di manubrio", "Sport" ,"peso.jpg");
 			Asta a5  = new Asta("Manubrio da palestra ", "Prezzo scontato per manubri 5 kg", LocalDateTime.now().plusDays(2), p5, "rick@gmail.com",1.00);
 			Offerta of222 = new Offerta(19, "linda@gmail.com", a5);
 			a5.inserisci(of222);
@@ -137,15 +145,15 @@ public class DbMock {
 			asteDaMostare.add(a5);
 			test.add(a5);
 			
-			Prodotto p6 = new Prodotto("Smartwatch", "orologio da palestra", "Sport" ,"smartwatch.jpg");
-			Asta a6  = new Asta("Smartwatch per veri sportivi", "Inizia anchetu ad allenarti con smrtwatch", LocalDateTime.now().plusDays(2), p6, "rick@gmail.com",1.00);
+			Prodotto p6 = new Prodotto("Smartwatch", "Orologio da palestra", "Sport" ,"smartwatch.jpg");
+			Asta a6  = new Asta("Smartwatch per veri sportivi", "Inizia anche tu ad allenarti con smartwatch", LocalDateTime.now().plusDays(2), p6, "rick@gmail.com",1.00);
 			Offerta of2222 = new Offerta(19, "linda@gmail.com", a6);
 			a6.inserisci(of2222);
 			u5.getOfferteInCorso().add(of2222);
 			asteDaMostare.add(a6);
 			test.add(a6);
 			
-			Prodotto p7 = new Prodotto("Piscina idromassaggio", "Jacuzzi", "Sport" ,"piscina.jpg");
+			Prodotto p7 = new Prodotto("Piscina idromassaggio", "Jacuzzi", "Arredo" ,"piscina.jpg");
 			Asta a7  = new Asta("Jacuzzi nuova", "Jacuzzi nuova per relax 2 mt di diametro", LocalDateTime.now().plusSeconds(20), p7, "fre@gmail.com",1.00);
 			Offerta of22223 = new Offerta(19, "linda@gmail.com", a7);
 			a7.inserisci(of22223);
@@ -156,10 +164,10 @@ public class DbMock {
 			Asta a8  = new Asta("Clessidra 5 minuti", "Clessidra moderna modello desert", LocalDateTime.now().plusDays(2), p8, "pol@gmail.com",1.00);
 			Offerta of222222 = new Offerta(19, "linda@gmail.com", a8);
 			a8.inserisci(of222222);
-			u5.getOfferteInCorso().add(of22223);
+			u5.getOfferteInCorso().add(of222222);
 			asteDaMostare.add(a8);
 			
-			Prodotto p9 = new Prodotto("Quadro", "quadro astratto", "Arredo" ,"quadro.jpg");
+			Prodotto p9 = new Prodotto("Quadro", "Quadro astratto", "Arredo" ,"quadro.jpg");
 			Asta a9  = new Asta("Quadro 1895 ", "Quadro antico stile astrattismo", LocalDateTime.now().plusDays(2), p9, "mark@gmail.com",1.00);
 			Offerta of22222 = new Offerta(19, "rick@gmail.com", a9);
 			Offerta of4444 = new Offerta(100,"linda@gmail.com", a9);
@@ -180,8 +188,13 @@ public class DbMock {
 			Asta a11  = new Asta("Guantoni da Box ", "Comodi per chi è nuovo allo sport", LocalDateTime.now().plusDays(2), p11, "pol@gmail.com",1.00);
 			Offerta of22222222 = new Offerta(19, "linda@gmail.com", a11);
 			a11.inserisci(of22222222);
-			a10.inserisci(of22222222);
 			asteDaMostare.add(a11);
+			
+			Prodotto p12 = new Prodotto("Scarpe da calcio Adidas", "Scarpe 13 tacchetti", "Sport" ,"scarpa2.jpg");
+			Asta a12  = new Asta("Scarpe da calcio Adidas 13 ", "Scarpa fascia economica ", LocalDateTime.now().plusDays(2), p12, "pol@gmail.com",1.00);
+			Offerta of222222222 = new Offerta(25, "linda@gmail.com", a12);
+			a12.inserisci(of222222222);
+			asteDaMostare.add(a12);
 			
 			Ricarica r = new Ricarica(1000, "dollaro", LocalDateTime.now().minusDays(45));
 			test.getWallet().getListaRicariche().add(r);
@@ -198,6 +211,9 @@ public class DbMock {
 			Prelievo p31=new Prelievo(340,"euro", LocalDateTime.now().minusDays(5));
 			test.getWallet().getListaPrelievi().add(p31);
 			test.getWallet().setSaldo(test.getWallet().getSaldo()-340);
+			Ricarica r3 = new Ricarica(3512, "dollaro", LocalDateTime.now().minusDays(45));
+			u5.getWallet().getListaRicariche().add(r3);
+			u5.getWallet().setSaldo(u5.getWallet().getSaldo()+3512);
 		}
 	};
 	public static List<Asta> getAsteFromVenditore(String email)

@@ -134,6 +134,17 @@ public class VediAsta {
 		lblNewLabel_9.setBounds(10, 115, 206, 30);
 		lblNewLabel_9.setText(a.getProdotto().getDescrizione());
 		
+		Label lblProprietario = new Label(grpProdotto, SWT.NONE);
+		lblProprietario.setText("Proprietario:");
+		lblProprietario.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblProprietario.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblProprietario.setBounds(10, 186, 94, 15);
+		
+		Label lblNewLabel_6_1_1 = new Label(grpProdotto, SWT.NONE);
+		lblNewLabel_6_1_1.setText(DbMock.getUtente(a.getVenditore()).getNomeProfilo());
+		lblNewLabel_6_1_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_6_1_1.setBounds(10, 207, 118, 15);
+		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblNewLabel_4.setBackground(SWTResourceManager.getColor(255, 215, 0));
@@ -170,7 +181,7 @@ public class VediAsta {
 		lblOffertaScontantaPallone.setForeground(SWTResourceManager.getColor(0, 0, 0));
 		lblOffertaScontantaPallone.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
 		lblOffertaScontantaPallone.setBackground(SWTResourceManager.getColor(255, 215, 0));
-		lblOffertaScontantaPallone.setBounds(196, 82, 228, 39);
+		lblOffertaScontantaPallone.setBounds(196, 82, 388, 39);
 		lblOffertaScontantaPallone.setText(a.getTitoloAsta());
 		
 		Label lblNewLabel_5 = new Label(shell, SWT.NONE);
@@ -189,6 +200,20 @@ public class VediAsta {
 		Label lblNewLabel_8 = new Label(shell, SWT.NONE);
 		lblNewLabel_8.setBackground(SWTResourceManager.getColor(255, 215, 0));
 		lblNewLabel_8.setBounds(83, 495, 329, 15);
+		
+		Label lblNewLabel_4_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_4_1.setText("Ultimo Offerente");
+		lblNewLabel_4_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblNewLabel_4_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_4_1.setBounds(365, 427, 133, 15);
+		
+		Label lblNewLabel_7_1 = new Label(shell, SWT.NONE);
+		if(!a.getOfferteInCorso().isEmpty())
+		lblNewLabel_7_1.setText(DbMock.getUtente(a.getOfferteInCorso().get(a.getOfferteInCorso().size()-1).getUtente()).getNomeProfilo());
+		else
+			lblNewLabel_7_1.setText("Nessun Offerente");
+		lblNewLabel_7_1.setBackground(SWTResourceManager.getColor(255, 215, 0));
+		lblNewLabel_7_1.setBounds(365, 448, 258, 15);
 		thread=true;
 		 timeThread = new Thread() {
 	        public void run() {

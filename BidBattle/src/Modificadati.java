@@ -192,6 +192,11 @@ public class Modificadati {
 					list.add("tt");
 				else
 					list.add(text_5.getText());
+				if(immPath.equals("nero.jpg"))
+				{
+					list.add(DbMock.getCurrentUser().getImmagineProfilo());
+				}
+				else
 					list.add(immPath);
 				boolean check= mc.modificaDati(list);
 				if(check)

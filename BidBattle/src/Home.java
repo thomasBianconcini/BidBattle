@@ -237,6 +237,7 @@ public class Home {
 		
 		
 		Combo combo = new Combo(shell, SWT.NONE);
+		combo.setItems(new String[] {"Sport", "Motori", "Arredo", "Abbigliamento", "Tecnologia"});
 		combo.setBounds(1480, 160, 104, 23);
 		combo.setText("Categoria");
 		
